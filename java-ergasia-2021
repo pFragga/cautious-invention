@@ -22,7 +22,7 @@ class Emp {
 class Exp {
   private String emp;
   private String type;
-  private  double quant;
+  private double quant;
   private String reason;
 }
 
