@@ -40,7 +40,9 @@ class Dif extends Trans {
 }
 
 class Comp extends Trans {
+  public operation() {
   
+  }
 }
 
 class Clear extends Trans {
