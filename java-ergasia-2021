@@ -1,3 +1,32 @@
+class ExpType {
+  private int id;
+  private String desc;
+  private double maxExp;
+}
+
+class ExpType1 extends ExpType{
+  private boolean price
+  private int units
+}
+
+class ExpType2 extends Exptype{
+  private double rate   
+}
+
+class Emp {
+  private String name;
+  private String surname;
+  private double maxTotal;
+}
+
+class Exp {
+  private String emp;
+  private String type;
+  private  double quant;
+  private String reason;
+}
+
+
 public static void main (String[] args) {
   
 }
