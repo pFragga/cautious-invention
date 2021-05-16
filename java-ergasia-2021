@@ -26,6 +26,28 @@ class Exp {
   private String reason;
 }
 
+class Trans {
+  private String emp;
+  private double value;
+}
+
+class DownPay extends Trans {
+  abstract 
+}
+
+class Dif extends Trans {
+  abstract 
+}
+
+class Comp extends Trans {
+  
+}
+
+class Clear extends Trans {
+  private String type;
+}
+
+
 
 public static void main (String[] args) {
   
