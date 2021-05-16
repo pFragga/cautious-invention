@@ -5,12 +5,12 @@ class ExpType {
 }
 
 class ExpType1 extends ExpType{
-  private boolean price
-  private int units
+  private boolean price;
+  private int unitsNo;
 }
 
 class ExpType2 extends Exptype{
-  private double rate   
+  private double rate;   
 }
 
 class Emp {
