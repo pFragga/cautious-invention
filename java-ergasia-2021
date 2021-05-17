@@ -24,6 +24,15 @@ class Exp {
   private String type;
   private double quant;
   private String reason;
+  
+  public Exp(String emp, String type, double quant, String reason) {
+    this.emp = emp;
+    this.type = type;
+    .
+    .
+    .
+    
+  }
 }
 
 class Trans {
@@ -31,17 +40,17 @@ class Trans {
   private double value;
 }
 
-class DownPay extends Trans {
-  abstract 
+abstract class DownPay extends Trans {
+   
 }
 
-class Dif extends Trans {
-  abstract 
+abstract class Dif extends Trans {
+   
 }
 
 class Comp extends Trans {
   public operation() {
-  
+    
   }
 }
 
