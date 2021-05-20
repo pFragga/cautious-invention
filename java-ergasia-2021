@@ -129,7 +129,7 @@ public static void mainMenu()
 			mainMenu();
 	}
 	while flag;
-	System.out.println("Enter ammount:");
+	System.out.println("Enter amount:");
 	int amount = myObj.nextInt();
-	Downpayment d = new Downpayment(amount, EmpSurame[i],)
+	Downpayment d = new Downpayment(amount, EmpSurame[menu-1],)
 }
