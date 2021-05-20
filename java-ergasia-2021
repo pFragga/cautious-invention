@@ -1,39 +1,52 @@
-class ExpType {
-  private int id;
-  private String desc;
-  private double maxExp;
-}
+//Expense class
+    public class Exp {
 
-class ExpType1 extends ExpType{
-  private boolean price;
-  private int unitsNo;
-}
+        private Emp emp;
+        private ExpType type;
+        private double quant;
+        private String reason;
 
-class ExpType2 extends Exptype{
-  private double rate;   
-}
+        public Exp (Emp emp, ExpType type, double quant, String reason) {
 
-class Emp {
-  private String name;
-  private String surname;
-  private double maxTotal;
-}
+            this.emp = emp;
+            this.type = type;
+            this.quant = quant;
+            this.reason = reason;
 
-class Exp {
-  private String emp;
-  private String type;
-  private double quant;
-  private String reason;
-  
-  public setExp(String emp, String type, double quant, String reason) {
-    this.emp = emp;
-    this.type = type;
-    .
-    .
-    .
+        }
+
+        //ypologizoume edw to value?
+        public calcValue () {
+             
+        }
+
+    }
     
-  }
-}
+    public abstract class ExpType {
+
+        private int id;
+        private String desc;
+        private double maxExp;
+        
+    }
+      
+    public class ExpType1 extends ExpType {
+
+        public double price;
+        public int unitsNo;
+
+    }
+      
+    public class ExpType2 extends Exptype{
+        private double rate;   
+    }
+      
+    class Emp {
+
+        private String name, surname;
+        private double maxTotal;
+
+    }
 
 class Trans {
   private String emp;
