@@ -1,0 +1,87 @@
+/** 
+ * Κάνω αυτό το αρχείο για να αποθηκέυω τις αλλαγές που έχω κάνει
+ * στο δικό μου μέρος
+ * 
+ * νμζ είναι καλύτερο απ'το να ανανεώνουμε συνεχώς το κύριο αρχείο
+ */
+
+class petros {
+
+    //Expense class
+    class Exp {
+
+        private Emp emp;
+        private ExpType type;
+        private double quant;
+        private String reason;
+        public int unitsNo;
+
+        public Exp (Emp emp, ExpType type, double quant, String reason) {
+
+            this.emp = emp;
+            this.type = type;
+            this.quant = quant;
+            this.reason = reason;
+
+    }
+
+
+
+}
+
+    //ExpenseType class and subclasses
+    abstract class ExpType {
+
+        private int ID;
+        private String desc;
+        private double maxExp;
+
+        public ExpType (int ID, String desc, double maxExp) {
+
+            this.ID = ID;
+            this.desc = desc;
+            this.maxExp = maxExp;
+        }
+     
+        public calcValue() {
+            return ;
+        }
+
+    }
+      
+    class ExpType1 extends ExpType {
+
+        public double price;
+
+        public ExpType1(int ID, String desc, double maxExp, double price) {
+
+            super(ID, desc, maxExp);
+            this.price = price;
+
+        }
+
+}
+      
+    class ExpType2 extends Exptype {
+
+        private double rate;
+
+    }
+
+    //Emploee class     
+    class Emp {
+
+        private String name, surname;
+        private double maxTotal;
+
+        public Emp (String n, String s, double max) {
+
+            name = n;
+            surname = s;
+            maxTotal = max;
+
+        }
+    
+    }
+
+}
