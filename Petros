@@ -5,6 +5,8 @@
  * νμζ είναι καλύτερο απ'το να ανανεώνουμε συνεχώς το κύριο αρχείο
  */
 
+import java.util.Scanner;
+
 class petros {
 
     //Expense class
@@ -22,8 +24,9 @@ class petros {
             this.quant = quant;
             this.reason = reason;
         
-        
-        }   
+        }
+
+        public getExp () {}
 
     }
 
@@ -39,9 +42,10 @@ class petros {
             this.ID = ID;
             this.desc = desc;
             this.maxExp = maxExp;
+
         }
      
-        public calcValue() {
+        public double calcValue() {
             return ;
         }
 
@@ -49,8 +53,7 @@ class petros {
       
     class ExpType1 extends ExpType {
 
-        public double price;
-        public int unitsNo;
+        private double price;
 
         public ExpType1(int ID, String desc, double maxExp, double price) {
 
@@ -64,6 +67,13 @@ class petros {
     class ExpType2 extends Exptype {
 
         private double rate;
+
+        public ExpType2(int ID, String desc, double maxExp, double rate) {
+
+            super(ID, desc, maxExp);
+            this.rate = rate;
+
+        }
 
     }
 
@@ -80,7 +90,18 @@ class petros {
             maxTotal = max;
 
         }
+
+        public String getEmpName () {
+            return name;
+        }
     
+    }
+
+    
+    public static void main(String[] args) {
+
+
+        
     }
 
 }
