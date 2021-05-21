@@ -14,7 +14,6 @@ class petros {
         private ExpType type;
         private double quant;
         private String reason;
-        public int unitsNo;
 
         public Exp (Emp emp, ExpType type, double quant, String reason) {
 
@@ -22,12 +21,11 @@ class petros {
             this.type = type;
             this.quant = quant;
             this.reason = reason;
+        
+        
+        }   
 
     }
-
-
-
-}
 
     //ExpenseType class and subclasses
     abstract class ExpType {
@@ -52,6 +50,7 @@ class petros {
     class ExpType1 extends ExpType {
 
         public double price;
+        public int unitsNo;
 
         public ExpType1(int ID, String desc, double maxExp, double price) {
 
@@ -60,7 +59,7 @@ class petros {
 
         }
 
-}
+    }
       
     class ExpType2 extends Exptype {
 
