@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class mainApp {
 
     private static Scanner input;
+    static ArrayList<Emp> employees;
+    
 
     static void mainMenu() {
         int menu;
@@ -36,7 +38,7 @@ public class mainApp {
         String b = input.nextLine();
         System.out.println("Enter employee's first name");
         double c = input.nextDouble();
-        AccountingDepartment.addEmployee(new Emp(a, b, c));
+        addEmployee(new Emp(a, b, c));
 }
     
     
@@ -57,25 +59,26 @@ public class mainApp {
     }
 
 
-    class AccountingDepartment {
-        private ArrayList<Emp> employees;
+    
+    
 
-        public AccountingDepartment() {
-            this.employees = new ArrayList<Emp>();
-        }
+    
 
-        public void addEmployee(final Emp a) {
-            this.employees.add(a);
-        }
-
+    static void addEmployee(final Emp a) {
+        employees.add(a);
     }
+
+    
 
     
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        employees = new ArrayList<Emp>();
         System.out.println("Welcome to mainApp!");
         mainMenu();
+
+        
     }
 
 }
