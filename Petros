@@ -5,9 +5,9 @@
  * νμζ είναι καλύτερο απ'το να ανανεώνουμε συνεχώς το κύριο αρχείο
  */
 
-import java.util.Scanner;
+mport java.util.Scanner;
 
-class petros {
+public class petros {
 
     //Expense class
     class Exp {
@@ -26,7 +26,31 @@ class petros {
         
         }
 
-        public getExp () {}
+        public Emp getEmp() {
+
+            return this.emp;
+
+        } 
+
+        public ExpType getExpType () {
+
+            return this.type;
+            
+        }
+
+        public double getQuant () {
+
+            return this.quant;
+
+        }
+
+        @Override
+        public String toString () {
+
+            return this.emp + " " + this.type + " " + this.quant + " " + this.reason;
+
+        }
+        
 
     }
 
@@ -35,67 +59,146 @@ class petros {
 
         private int ID;
         private String desc;
-        private double maxExp;
+        private double maxMonthlyExp;
 
-        public ExpType (int ID, String desc, double maxExp) {
+        public ExpType (int ID, String desc, double maxMonthlyExp) {
 
             this.ID = ID;
             this.desc = desc;
-            this.maxExp = maxExp;
+            this.maxMonthlyExp = maxMonthlyExp;
 
         }
-     
-        public double calcValue() {
-            return ;
+
+        public int getExpType () {
+
+            return this.ID;
+
         }
+
+        public String getDescription () {
+
+            return this.desc;
+
+        }
+
+        public double getMaxMonthlyExp () {
+
+            return this.maxMonthlyExp;
+
+        }
+
+        @Override
+        public String toString () {
+
+            return this.ID + " " + this.desc + " " + this.maxMonthlyExp;
+
+        }
+
+        public 
 
     }
       
     class ExpType1 extends ExpType {
 
-        private double price;
+        private double price, unitNo;
 
-        public ExpType1(int ID, String desc, double maxExp, double price) {
+        public ExpType1 (int ID, String desc, double maxExp, double price, double unitNo) {
 
-            super(ID, desc, maxExp);
+            super (ID, desc, maxExp);
             this.price = price;
+
+        }
+
+        public double getPrice () {
+
+            return this.price;
+
+        }
+
+        public double getUnitNo () {
+
+            return this.unitNo;
+
+        }
+
+        public double calcValue (double quant) {
+
+            return  quant * this.price;
 
         }
 
     }
       
-    class ExpType2 extends Exptype {
+    class ExpType2 extends ExpType {
 
         private double rate;
 
-        public ExpType2(int ID, String desc, double maxExp, double rate) {
+        public ExpType2 (int ID, String desc, double maxExp, double rate) {
 
-            super(ID, desc, maxExp);
+            super (ID, desc, maxExp);
             this.rate = rate;
 
         }
 
+        public double getRate() {
+
+            return this.rate;
+
+        }
+
+        public double calcValue (double n) {
+
+            return n * this.rate;
+
+        }
+
+
+
     }
 
-    //Emploee class     
+    //Employee class     
     class Emp {
 
         private String name, surname;
-        private double maxTotal;
+        private double maxMonthlyTotal;
 
         public Emp (String n, String s, double max) {
 
             name = n;
             surname = s;
-            maxTotal = max;
+            maxMonthlyTotal = max;
 
         }
 
+        public String getFirstName () {
+
+            return this.name;
+
+        }
+
+        public String getLastName () {
+
+            return this.surname;
+
+        }
+
+        public double getMaxMonthlyTotal () {
+
+            return this.maxMonthlyTotal;
+
+        }
+
+        public void setMaxMonthlyTotal (final double maxMonthlyTotal) {
+
+            this.maxMonthlyTotal = maxMonthlyTotal;
+
+        }
+
+        @Override
         public String toString () {
-
-            return "Emploee name: " + name
-                    + "\nEmploee last name: " + surname;
-
+            
+            return name + " " + surname;
+            
         }
     
     }
