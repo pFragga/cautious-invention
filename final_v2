@@ -7,17 +7,17 @@ class Employee {
     private double maxMonthlyTotal;
 
     public Employee(String n, String s, double maxMonthlyTotal) {
-	this.name = n;
-	this.surname = s;
-	this.maxMonthlyTotal = maxMonthlyTotal;
+		this.name = n;
+		this.surname = s;
+		this.maxMonthlyTotal = maxMonthlyTotal;
     }
 
     public double getMaxMonthlyTotal() {
-	return this.maxMonthlyTotal;
+		return this.maxMonthlyTotal;
     }
 
     public String toString() {
-	return name + " " + surname;
+		return name + " " + surname;
     }
 }
 
@@ -31,11 +31,11 @@ class Expense {
     double amount;
 
     public Employee getEmployee() {
-	return employee;
+		return employee;
     }
 
     public String toString() {
-	return employee + " spent " + amount + " for " + expenseType;
+		return employee + " spent " + amount + " for " + expenseType;
     }
 }
 
@@ -45,22 +45,21 @@ public class MainApp {
     ArrayList<Expense> expenses;
 
     void loadData() {
-	Employee petros = new Employee("peter", "fraggatzis", 1000);
-	employees.add(petros);
-	Employee theodore = new Employee("theo", "dore", 100);
-	employees.add(theodore);
-	Employee filimon = new Employee("filimon", "fraggatzis", 500);
-	employees.add(filimon);
-	Employee lilia = new Employee("lilia", "mavros", 500000);
-	employees.add(lilia);
+		Employee petros = new Employee("peter", "fraggatzis", 1000);
+		employees.add(petros);
+		Employee theodore = new Employee("theo", "dore", 100);
+		employees.add(theodore);
+		Employee filimon = new Employee("filimon", "fraggatzis", 500);
+		employees.add(filimon);
+		Employee lilia = new Employee("lilia", "mavros", 500000);
+		employees.add(lilia);
     }
 
     public MainApp() {
         input = new Scanner(System.in);
         employees = new ArrayList<Employee>();
-	expenses = new ArrayList<Expense>();
-
-	loadData();
+		expenses = new ArrayList<Expense>();
+		loadData();
     }
 
     void newEmployee() {
@@ -70,16 +69,14 @@ public class MainApp {
         String b = input.nextLine();
         System.out.print("Enter employee's max monthly compensation: ");
         double c = input.nextDouble();
-	input.nextLine(); // clear newline
+		input.nextLine(); // clear newline
         employees.add(new Employee(a, b, c));
     }
 
-
     public void mainMenu() {
         int menu;
-
-	do {
-	    System.out.println("Enter number to continue"
+		do {
+			System.out.println("Enter number to continue"
 			       +"\n1: Add new expense type"
 			       +"\n2: Add new employee"
 			       +"\n3: Add new employee expense"
@@ -90,17 +87,17 @@ public class MainApp {
 			       +"\n8: Clear all company's employees' expenses"
 			       +"\n9: Print final monthly sum of all employees"
 			       +"\n0: exit");
-	    System.out.print("Enter selection [0-9]: ");
-	    menu = input.nextInt();
-	    input.nextLine(); // skip newline
-	    switch (menu) {
-		case 2: 
-		    newEmployee();
-		    break;
-		case 0:
-		    break;
-		default:
-		    System.out.println("Invalid number!");
+			System.out.print("Enter selection [0-9]: ");
+			menu = input.nextInt();
+			input.nextLine(); // skip newline
+			switch (menu) {
+			case 2: 
+				newEmployee();
+				break;
+			case 0:
+				break;
+			default:
+				System.out.println("Invalid number!");
 	    }
 	} while (menu != 0);
 
@@ -108,7 +105,6 @@ public class MainApp {
 	for (Employee employee: employees) {
 	    System.out.println(employee);
 	}
-    }
     
     List<Expense> getExpensesForEmployee(Employee employee) {
 	List<Expense> employeeExpenses = new ArrayList<Expense>();
@@ -121,15 +117,15 @@ public class MainApp {
     }
 
     void printExpensesForEmployee(Employee employee) {
-	List<Expense> employeeExpenses = getExpensesForEmployee(employee);
-	for (Expense expense: employeeExpenses) {
+		List<Expense> employeeExpenses = getExpensesForEmployee(employee);
+		for (Expense expense: employeeExpenses) {
 	    System.out.println(expense);
-	}
+		}
     }
 
     public static void main(String[] args) {
         System.out.println("Welcome to mainApp!");
-	MainApp myapp = new MainApp();
+		MainApp myapp = new MainApp();
         myapp.mainMenu();
     }
 }
