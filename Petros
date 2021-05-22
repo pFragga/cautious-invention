@@ -49,7 +49,6 @@ abstract class ExpenseType {
 		return this.maxMonthlyExpense;
 	}
 
-	@Override
 	public String toString () {
 		return this.ID + " " + this.desc + " " + this.maxMonthlyExpense;
 	}
@@ -64,7 +63,46 @@ class ExpenseType1 extends ExpenseType {
 		this.unitNo = unit;
 	}
 
-	
+	public double getPrice () {
+		return this.price;
+	}
+
+	public double getUnitNo () {
+		return this.unitNo;
+	}
+
+	public double calcValue (double quantity) {
+		return  quantity * this.price;
+	}
+
+	@Override
+	public String toString() {
+		return ;
+	}
+
+//ExpenseType2 class
+class ExpenseType2 extends ExpenseType {
+	private double rate;
+	public ExpenseType2(int ID, String desc, double maxMonthlyExpense, double rate) {
+		super(ID, desc, maxMonthlyExpense);
+		this.rate = rate;
+	}
+
+	public double getRate() {
+		return this.rate;
+	}
+
+	public double calcValue (double n) {
+		return (n * this.rate) / 100;
+	}
+
+	@Override
+	public String toString() {
+		return ;
+	}
+
+}
+
 }
 
 //Expense class
