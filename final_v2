@@ -76,7 +76,7 @@ public class MainApp {
     public void mainMenu() {
         int menu;
 		do {
-			System.out.println("Enter number to continue"
+			System.out.println("Main Menu"
 			       +"\n1: Add new expense type"
 			       +"\n2: Add new employee"
 			       +"\n3: Add new employee expense"
@@ -87,7 +87,7 @@ public class MainApp {
 			       +"\n8: Clear all company's employees' expenses"
 			       +"\n9: Print final monthly sum of all employees"
 			       +"\n0: exit");
-			System.out.print("Enter selection [0-9]: ");
+			System.out.print("Enter selection to continue [0-9]: ");
 			menu = input.nextInt();
 			input.nextLine(); // skip newline
 			switch (menu) {
