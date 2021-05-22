@@ -91,15 +91,40 @@ public class MainApp {
 			menu = input.nextInt();
 			input.nextLine(); // skip newline
 			switch (menu) {
-			case 2: 
-				newEmployee();
-				break;
-			case 0:
-				break;
-			default:
-				System.out.println("Invalid number!");
-	    }
-	} while (menu != 0);
+				case 1:
+					newExpenseType();
+					break;
+				case 2: 
+					newEmployee();
+					break;
+				case 3:
+					newExmployeeExp();
+					break;
+				case 4:
+					newDownpayment();
+					break;
+				case 5: 
+					printExpenses();
+					break;
+				case 6: 
+					clearExpenses();
+					break;
+				case 7: 
+					printTransactions();
+					break;
+				case 8:
+					clearAll();
+					break;
+				case 9:
+					printAll();
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Invalid number!");
+			}
+		} while (menu != 0);
+	}
 
 	// XXX just random testing. erase later.
 	for (Employee employee: employees) {
