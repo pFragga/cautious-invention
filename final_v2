@@ -75,6 +75,7 @@ public class MainApp {
 
     public void mainMenu() {
         int menu;
+	
 		do {
 			System.out.println("Main Menu"
 			       +"\n1: Add new expense type"
