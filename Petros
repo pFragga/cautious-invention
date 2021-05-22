@@ -7,277 +7,184 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.Scanner;
 
-public class petros {
+//Employee class
+class Employee {
+    private String name, surname;
+    private double maxMonthlyTotal;
 
-    //Expense class
-    class Exp {
-
-        private Emp emp;
-        private ExpType type;
-        private double quantity;
-        private String reason;
-
-        public Exp (Emp emp, ExpType type, double quant, String reason) {
-
-            this.emp = emp;
-            this.type = type;
-            this.quantity = quant;
-            this.reason = reason;
-        
-        }
-
-        public Emp getEmp() {
-
-            return this.emp;
-
-        } 
-
-        public ExpType getExpType () {
-
-            return this.type; 
-            
-        }
-
-        public double getQuant () {
-
-            return this.quantity;
-
-        }
-
-        @Override
-        public String toString () {
-
-            return this.emp + " " + this.type + " " + this.quantity + " " + this.reason;
-
-        }
-        
-
+    public Employee(String n, String s, double maxMonthlyTotal) {
+		this.name = n;
+		this.surname = s;
+		this.maxMonthlyTotal = maxMonthlyTotal;
     }
 
-    //ExpenseType class
-    abstract class ExpType {
-
-        private int ID;
-        private String desc;
-        private double maxMonthlyExp;
-
-        public ExpType (int ID, String desc, double maxMonthlyExp) {
-
-            this.ID = ID;
-            this.desc = desc;
-            this.maxMonthlyExp = maxMonthlyExp;
-
-        }
-
-        public int getID () {
-
-            return this.ID;
-
-        }
-
-        public String getDescription () {
-
-            return this.desc;
-
-        }
-
-        public double getMaxMonthlyExp () {
-
-            return this.maxMonthlyExp;
-
-        }
-
-        @Override
-        public String toString () {
-
-            return this.ID + " " + this.desc + " " + this.maxMonthlyExp;
-
-        }
-
-    }
-    //ExpenseType 1
-    class ExpType1 extends ExpType {
-
-        private double price, unitNo;
-
-        public ExpType1 (int ID, String desc, double maxExp, double price, double unitNo) {
-
-            super (ID, desc, maxExp);
-            this.price = price;
-            this.unitNo = unitNo;
-
-        }
-
-        public double getPrice () {
-
-            return this.price;
-
-        }
-
-        public void setUnitNo (double unitNo) {
-
-            this.unitNo = unitNo;
-
-        }
-
-        public double getUnitNo () {
-
-            return this.unitNo;
-
-        }
-        
-        public double calcValue (double quantity) {
-
-            return  quantity * this.price;
-
-        }
-
-    }
-    //ExpenseType 2
-    class ExpType2 extends ExpType {
-
-        private double rate;
-
-        public ExpType2 (int ID, String desc, double maxExp, double rate) {
-
-            super (ID, desc, maxExp);
-            this.rate = rate;
-
-        }
-
-        public double getRate() {
-
-            return this.rate;
-
-        }
-        
-        public double calcValue (double n) {
-
-            return (n * this.rate) / 100;
-
-        }
-
-
-
+    public double getMaxMonthlyTotal() {
+	return this.maxMonthlyTotal;
     }
 
-    //Employee class
-    class Emp {
+    public String toString() {
+	return name + " " + surname;
+    }
+}
 
-        private String name, surname;
-        private double maxMonthlyTotal;
+//ExpenseType class
+abstract class ExpenseType {
+	private int ID;
+    private String desc;
+    private double maxMonthlyExpense;
 
-        public Emp (String n, String s, double max) {
+	public ExpenseType (int ID, String desc, double maxMonthlyExpense) {
+		this.ID = ID;
+        this.desc = desc;
+        this.maxMonthlyExpense = maxMonthlyExpense;
+	}
 
-            name = n;
-            surname = s;
-            maxMonthlyTotal = max;
+	public String getDescription () {
+		return this.desc;
+	}
 
-        }
+	public double getMaxMonthlyExpense () {
+		return this.maxMonthlyExpense;
+	}
 
-        public String getFirstName () {
+	@Override
+	public String toString () {
+		return this.ID + " " + this.desc + " " + this.maxMonthlyExpense;
+	}
+}
 
-            return this.name;
+//ExpenseType1 class
+class ExpenseType1 extends ExpenseType {
+	private double price, unitNo;
+	public ExpenseType1(int ID, String desc, double maxMonthlyExpense, double p, double unit) {
+		super(ID, desc, maxMonthlyExpense);
+		this.price = p;
+		this.unitNo = unit;
+	}
 
-        }
+	
+}
 
-        public String getLastName () {
+//Expense class
+class Expense {
+    private Employee employee;
+    private ExpenseType expenseType;
+    private double amount;
+	private String reason;
 
-            return this.surname;
+	public Expense (Employee emp, ExpenseType type, double amount, String reason) {
+		this.employee = emp;
+		this.expenseType = type;
+		this.amount = amount;
+		this.reason = reason;
+	}
 
-        }
-
-        public double getMaxMonthlyTotal () {
-
-            return this.maxMonthlyTotal;
-
-        }
-
-        public void setMaxMonthlyTotal (final double maxMonthlyTotal) {
-
-            this.maxMonthlyTotal = maxMonthlyTotal;
-
-        }
-
-        @Override
-        public String toString () {
-            
-            return name + " " + surname;
-            
-        }
+    public Employee getEmployee() {
+		return employee;
     }
 
-    //Transaction class
-    abstract class Trans {
-        private Emp employee;
-        private double value;
+	public ExpenseType getExpenseType () {
+		return this.expenseType; 
+	}
+
+    public String toString() {
+		return employee + " spent " + amount + " for " + expenseType + " , the reason being: " + reason;
+    }
+}
+//MainApp class
+public class MainApp {
+    Scanner input;
+    ArrayList<Employee> employees;
+    ArrayList<Expense> expenses;
+
+    void loadData() {
+	Employee petros = new Employee("peter", "fraggatzis", 1000);
+	employees.add(petros);
+	Employee theodore = new Employee("theo", "dore", 100);
+	employees.add(theodore);
+	Employee filimon = new Employee("filimon", "fraggatzis", 500);
+	employees.add(filimon);
+	Employee lilia = new Employee("lilia", "mavros", 500000);
+	employees.add(lilia);
+    }
+
+    public MainApp() {
+        input = new Scanner(System.in);
+        employees = new ArrayList<Employee>();
+	expenses = new ArrayList<Expense>();
+
+	loadData();
+    }
+
+    void newEmployee() {
+        System.out.print("Enter employee's last name: ");
+        String a = input.nextLine();
+        System.out.print("Enter employee's first name: ");
+        String b = input.nextLine();
+        System.out.print("Enter employee's max monthly compensation: ");
+        double c = input.nextDouble();
+	input.nextLine(); // clear newline
+        employees.add(new Employee(a, b, c));
+    }
+
+
+    public void mainMenu() {
+        int menu;
+
+	do {
+	    System.out.println("Enter number to continue"
+			       +"\n1: Add new expense type"
+			       +"\n2: Add new employee"
+			       +"\n3: Add new employee expense"
+			       +"\n4: Add new downpayment transaction"
+			       +"\n5: Print employees' expenses"
+			       +"\n6: Clear employee's expenses"
+			       +"\n7: Print employees' transactions"
+			       +"\n8: Clear all company's employees' expenses"
+			       +"\n9: Print final monthly sum of all employees"
+			       +"\n0: exit");
+	    System.out.print("Enter selection [0-9]: ");
+	    menu = input.nextInt();
+	    input.nextLine(); // skip newline
+	    switch (menu) {
+		case 2: 
+		    newEmployee();
+		    break;
+		case 0:
+		    break;
+		default:
+		    System.out.println("Invalid number!");
+	    }
+	} while (menu != 0);
+
+	// XXX just random testing. erase later.
+	for (Employee employee: employees) {
+	    System.out.println(employee);
+	}
+    }
     
-        public Trans(Emp employee, double value) {
-            this.employee = employee;
-            this.value = value;
-        }
-    
-        public Emp getEmployee() {
-            return this.employee;
-        }
-    
-        public double getValue() {
-            return this.value;
-        }
+    List<Expense> getExpensesForEmployee(Employee employee) {
+	List<Expense> employeeExpenses = new ArrayList<Expense>();
+	for (Expense expense: expenses) {
+	    if (expense.getEmployee() == employee) {
+		employeeExpenses.add(expense);
+	    }
+	}
+        return employeeExpenses;
     }
 
-
-    class AccountingDepartment {
-        private static Scanner input;
-
-        private ArrayList<Emp> employees;
-        private ArrayList<Exp> expenses;
-        private ArrayList<ExpType> expenseTypes;
-        private ArrayList<Trans> transactions;
-
-        public AccountingDepartment() {
-
-            this.employees = new ArrayList<Emp>();
-            this.expenses = new ArrayList<Exp>();
-            this.expenseTypes = new ArrayList<ExpType>();
-
-        }
-
-        public void addEmployee(final Emp a) {
-            this.employees.add(a);
-        }
-        
-        public void addExpense(final Exp a) {
-            this.expenses.add(a);
-        }
-
-        public void addExpenseType(final ExpType a) {
-            this.expenseTypes.add(a);
-        }
-
-        public void addDownPayment(final Trans b) {
-            this.transactions.add(b);
-        }
-
-        public void addCompensation() {
-            
-        }
-
-        public void addDifference() {
-
-        }
-
-        private ArrayList<EmployeeMovement> employeeMovements;
-
-        static AccountingDepartment accountingDepartment;
+    void printExpensesForEmployee(Employee employee) {
+	List<Expense> employeeExpenses = getExpensesForEmployee(employee);
+	for (Expense expense: employeeExpenses) {
+	    System.out.println(expense);
+	}
     }
-
-    
 
     public static void main(String[] args) {
-        accountingDepartment = new AccountingDepartment();
+        System.out.println("Welcome to mainApp!");
+	MainApp myapp = new MainApp();
+        myapp.mainMenu();
     }
 }
