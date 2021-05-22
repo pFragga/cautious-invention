@@ -1,3 +1,11 @@
+import java.util.Scanner;
+
+public static void main (String[] args) {
+	Scanner myObj = new Scanner(System.in);
+	System.out.println("Welcome to mainApp!");
+	mainMenu();
+}
+
 public static void mainMenu()
 	int menu;
 	System.out.println("Enter number to continue"
@@ -13,34 +21,34 @@ public static void mainMenu()
 	}
 	int menu = myObj.nextInt();
 	switch (menu) {
-		 case 1:
+		case 1:
 			newExpenseType();
 			break;
-		 case 2: 
+		case 2: 
 			newEmployee();
 			break;
-		 case 3:
+		case 3:
 			newExmployeeExp();
 			break;
-		 case 4:
+		case 4:
 			newDownpayment();
 			break;
-		 case 5: 
+		case 5: 
 			printExpenses();
 			break;
-		 case 6: 
+		case 6: 
 			clearExpenses();
 			break;
-		 case 7: 
+		case 7: 
 			printTransactions();
 			break;
-		 case 8:
+		case 8:
 			clearAll();
 			break;
-		 case 9:
+		case 9:
 		 	printAll();
 			break;
-		 default:
+		default:
 			System.out.println("Invalid number!");
 			mainMenu();
  }
