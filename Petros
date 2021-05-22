@@ -5,7 +5,7 @@
  * νμζ είναι καλύτερο απ'το να ανανεώνουμε συνεχώς το κύριο αρχείο
  */
 
-mport java.util.Scanner;
+import java.util.ArrayList;
 
 public class petros {
 
@@ -14,14 +14,14 @@ public class petros {
 
         private Emp emp;
         private ExpType type;
-        private double quant;
+        private double quantity;
         private String reason;
 
         public Exp (Emp emp, ExpType type, double quant, String reason) {
 
             this.emp = emp;
             this.type = type;
-            this.quant = quant;
+            this.quantity = quant;
             this.reason = reason;
         
         }
@@ -34,20 +34,20 @@ public class petros {
 
         public ExpType getExpType () {
 
-            return this.type;
+            return this.type; 
             
         }
 
         public double getQuant () {
 
-            return this.quant;
+            return this.quantity;
 
         }
 
         @Override
         public String toString () {
 
-            return this.emp + " " + this.type + " " + this.quant + " " + this.reason;
+            return this.emp + " " + this.type + " " + this.quantity + " " + this.reason;
 
         }
         
@@ -92,7 +92,7 @@ public class petros {
 
             return this.ID + " " + this.desc + " " + this.maxMonthlyExp;
 
-        }
+        } 
 
     }
       
@@ -104,6 +104,7 @@ public class petros {
 
             super (ID, desc, maxExp);
             this.price = price;
+            this.unitNo = unitNo;
 
         }
 
@@ -113,15 +114,21 @@ public class petros {
 
         }
 
+        public void setUnitNo (double unitNo) {
+
+            this.unitNo = unitNo;
+
+        }
+
         public double getUnitNo () {
 
             return this.unitNo;
 
         }
 
-        public double calcValue (double quant) {
+        public double calcValue (double quantity) {
 
-            return  quant * this.price;
+            return  quantity * this.price;
 
         }
 
@@ -146,7 +153,7 @@ public class petros {
 
         public double calcValue (double n) {
 
-            return n * this.rate;
+            return (n * this.rate) / 100;
 
         }
 
@@ -198,17 +205,27 @@ public class petros {
             return name + " " + surname;
             
         }
-    
     }
 
-    
+    class AccountingDepartment {
+        private ArrayList<Emp> employees;
+        private ArrayList<Exp> expenses;
+        private ArrayList<ExpType> expenseTypes;
+
+        public AccountingDepartment () {
+            this.employees = new ArrayList<Emp>();
+            this.expenses = new ArrayList<Exp>();
+            this.expenseTypes = new ArrayList<ExpType>();
+        }
+
+        public void addEmployee (final Emp a) {
+            this.employees.add(a);
+        }
+
+
+    }
+
     public static void main(String[] args) {
-
-        Scanner in = new Scanner(System.in);
-
-        
-        
         
     }
-
 }
