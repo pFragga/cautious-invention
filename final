@@ -1,0 +1,46 @@
+public static void mainMenu()
+	int menu;
+	System.out.println("Enter number to continue"
+			   +"\n1: Insert new expense type"
+			   +"\n2: Insert new employee"
+			   +"\n3: Insert new employee expense"
+			   +"\n4: Insert new downpayment transaction"
+			   +"\n5: Print employees' expenses"
+			   +"\n6: Clear employee's expenses"
+			   +"\n7: Print employees' transactions"
+			   +"\n8: Clear all company's employees' expenses"
+			   +"\n9: Print final monthly sum of all employees");
+	}
+	int menu = myObj.nextInt();
+	switch (menu) {
+		 case 1:
+			newExpenseType();
+			break;
+		 case 2: 
+			newEmployee();
+			break;
+		 case 3:
+			newExmployeeExp();
+			break;
+		 case 4:
+			newDownpayment();
+			break;
+		 case 5: 
+			printExpenses();
+			break;
+		 case 6: 
+			clearExpenses();
+			break;
+		 case 7: 
+			printTransactions();
+			break;
+		 case 8:
+			clearAll();
+			break;
+		 case 9:
+		  printAll();
+			break;
+		 default:
+			System.out.println("Invalid number!");
+			mainMenu();
+ }
