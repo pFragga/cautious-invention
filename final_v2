@@ -11,6 +11,7 @@ class Employee {
 		this.surname = s;
 		this.maxMonthlyTotal = maxMonthlyTotal;
     }
+    //do we need this?
 
     public double getMaxMonthlyTotal() {
 		return this.maxMonthlyTotal;
