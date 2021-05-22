@@ -57,7 +57,7 @@ public class petros {
 
     }
 
-    //ExpenseType class and subclasses
+    //ExpenseType class
     abstract class ExpType {
 
         private int ID;
@@ -72,7 +72,7 @@ public class petros {
 
         }
 
-        public int getExpType () {
+        public int getID () {
 
             return this.ID;
 
@@ -95,10 +95,10 @@ public class petros {
 
             return this.ID + " " + this.desc + " " + this.maxMonthlyExp;
 
-        } 
+        }
 
     }
-      
+    //ExpenseType 1
     class ExpType1 extends ExpType {
 
         private double price, unitNo;
@@ -128,7 +128,7 @@ public class petros {
             return this.unitNo;
 
         }
-
+        
         public double calcValue (double quantity) {
 
             return  quantity * this.price;
@@ -136,7 +136,7 @@ public class petros {
         }
 
     }
-      
+    //ExpenseType 2
     class ExpType2 extends ExpType {
 
         private double rate;
@@ -153,7 +153,7 @@ public class petros {
             return this.rate;
 
         }
-
+        
         public double calcValue (double n) {
 
             return (n * this.rate) / 100;
@@ -164,7 +164,7 @@ public class petros {
 
     }
 
-    //Employee class     
+    //Employee class
     class Emp {
 
         private String name, surname;
@@ -210,6 +210,26 @@ public class petros {
         }
     }
 
+    //Transaction class
+    abstract class Trans {
+        private Emp employee;
+        private double value;
+    
+        public Trans(Emp employee, double value) {
+            this.employee = employee;
+            this.value = value;
+        }
+    
+        public Emp getEmployee() {
+            return this.employee;
+        }
+    
+        public double getValue() {
+            return this.value;
+        }
+    
+        public abstract double reimbursementAmount();
+    }
 
 
     class AccountingDepartment {
@@ -218,11 +238,14 @@ public class petros {
         private ArrayList<Emp> employees;
         private ArrayList<Exp> expenses;
         private ArrayList<ExpType> expenseTypes;
+        private ArrayList<Trans> transactions;
 
         public AccountingDepartment() {
+
             this.employees = new ArrayList<Emp>();
             this.expenses = new ArrayList<Exp>();
             this.expenseTypes = new ArrayList<ExpType>();
+
         }
 
         public void addEmployee(final Emp a) {
@@ -237,14 +260,26 @@ public class petros {
             this.expenseTypes.add(a);
         }
 
-        static AccountingDepartment accountingDepartment;
+        public void addDownPayment(final Trans b) {
+            this.transactions.add(b);
+        }
+
+        public void addCompensation() {
+            
+        }
+
+        public void addDifference() {
 
         }
+
+        private ArrayList<EmployeeMovement> employeeMovements;
+
+        static AccountingDepartment accountingDepartment;
     }
 
     
 
     public static void main(String[] args) {
         accountingDepartment = new AccountingDepartment();
-
+    }
 }
