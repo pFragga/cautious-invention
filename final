@@ -21,22 +21,30 @@ class Employee {
     }
 }
 
+abstract class ExpenseType {
+
+}
+
 class Expense {
     Employee employee;
     ExpenseType expenseType;
     double amount;
+
+    public Employee getEmployee() {
+	return employee;
+    }
 
     public String toString() {
 	return employee + " spent " + amount + " for " + expenseType;
     }
 }
 
-public class mainApp {
-    private static Scanner input;
-    static ArrayList<Employee> employees;
-    static ArrayList<Expense> expenses;
+public class MainApp {
+    Scanner input;
+    ArrayList<Employee> employees;
+    ArrayList<Expense> expenses;
 
-    static void loadData() {
+    void loadData() {
 	Employee petros = new Employee("peter", "fraggatzis", 1000);
 	employees.add(petros);
 	Employee theodore = new Employee("theo", "dore", 100);
@@ -47,7 +55,15 @@ public class mainApp {
 	employees.add(lilia);
     }
 
-    static void newEmployee() {
+    public MainApp() {
+        input = new Scanner(System.in);
+        employees = new ArrayList<Employee>();
+	expenses = new ArrayList<Expense>();
+
+	loadData();
+    }
+
+    void newEmployee() {
         System.out.print("Enter employee's last name: ");
         String a = input.nextLine();
         System.out.print("Enter employee's first name: ");
@@ -59,7 +75,7 @@ public class mainApp {
     }
 
 
-    static void mainMenu() {
+    public void mainMenu() {
         int menu;
 
 	do {
@@ -87,19 +103,24 @@ public class mainApp {
 		    System.out.println("Invalid number!");
 	    }
 	} while (menu != 0);
+
+	// XXX just random testing. erase later.
+	for (Employee employee: employees) {
+	    System.out.println(employee);
+	}
     }
     
-    static List<Expense> getExpensesForEmployee(Employee employee) {
+    List<Expense> getExpensesForEmployee(Employee employee) {
 	List<Expense> employeeExpenses = new ArrayList<Expense>();
 	for (Expense expense: expenses) {
 	    if (expense.getEmployee() == employee) {
-		myExpenses.add(expense);
+		employeeExpenses.add(expense);
 	    }
 	}
         return employeeExpenses;
     }
 
-    static void printExpensesForEmployee(Employee employee) {
+    void printExpensesForEmployee(Employee employee) {
 	List<Expense> employeeExpenses = getExpensesForEmployee(employee);
 	for (Expense expense: employeeExpenses) {
 	    System.out.println(expense);
@@ -107,16 +128,8 @@ public class mainApp {
     }
 
     public static void main(String[] args) {
-        input = new Scanner(System.in);
-        employees = new ArrayList<Employee>();
-
-	loadData();
         System.out.println("Welcome to mainApp!");
-        mainMenu();
-
-	// just random testing. erase later.
-	for (Employee employee: employees) {
-	    System.out.println(employee);
-	}
+	MainApp myapp = new MainApp();
+        myapp.mainMenu();
     }
 }
