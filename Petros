@@ -227,8 +227,6 @@ public class petros {
         public double getValue() {
             return this.value;
         }
-    
-        public abstract double reimbursementAmount();
     }
 
 
