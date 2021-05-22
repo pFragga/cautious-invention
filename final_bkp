@@ -1,0 +1,123 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+class Employee {
+    private String name, surname;
+    private double maxMonthlyTotal;
+
+    public Employee(String n, String s, double maxMonthlyTotal) {
+	this.name = n;
+	this.surname = s;
+	this.maxMonthlyTotal = maxMonthlyTotal;
+    }
+
+    public double getMaxMonthlyTotal() {
+	return this.maxMonthlyTotal;
+    }
+
+    public String toString() {
+	return name + " " + surname;
+    }
+}
+
+class Expense {
+    Employee employee;
+    ExpenseType expenseType;
+    double amount;
+
+    public String toString() {
+	return employee + " spent " + amount + " for " + expenseType;
+    }
+}
+
+public class mainApp {
+    private static Scanner input;
+    static ArrayList<Employee> employees;
+    static ArrayList<Expense> expenses;
+
+    static void loadData() {
+	Employee petros = new Employee("peter", "fraggatzis", 1000);
+	employees.add(petros);
+	Employee theodore = new Employee("theo", "dore", 100);
+	employees.add(theodore);
+	Employee filimon = new Employee("filimon", "fraggatzis", 500);
+	employees.add(filimon);
+	Employee lilia = new Employee("lilia", "mavros", 500000);
+	employees.add(lilia);
+    }
+
+    static void newEmployee() {
+        System.out.print("Enter employee's last name: ");
+        String a = input.nextLine();
+        System.out.print("Enter employee's first name: ");
+        String b = input.nextLine();
+        System.out.print("Enter employee's max monthly compensation: ");
+        double c = input.nextDouble();
+	input.nextLine(); // clear newline
+        employees.add(new Employee(a, b, c));
+    }
+
+
+    static void mainMenu() {
+        int menu;
+
+	do {
+	    System.out.println("Enter number to continue"
+			       +"\n1: Add new expense type"
+			       +"\n2: Add new employee"
+			       +"\n3: Add new employee expense"
+			       +"\n4: Add new downpayment transaction"
+			       +"\n5: Print employees' expenses"
+			       +"\n6: Clear employee's expenses"
+			       +"\n7: Print employees' transactions"
+			       +"\n8: Clear all company's employees' expenses"
+			       +"\n9: Print final monthly sum of all employees"
+			       +"\n0: exit");
+	    System.out.print("Enter selection [0-9]: ");
+	    menu = input.nextInt();
+	    input.nextLine(); // skip newline
+	    switch (menu) {
+		case 2: 
+		    newEmployee();
+		    break;
+		case 0:
+		    break;
+		default:
+		    System.out.println("Invalid number!");
+	    }
+	} while (menu != 0);
+    }
+    
+    static List<Expense> getExpensesForEmployee(Employee employee) {
+	List<Expense> employeeExpenses = new ArrayList<Expense>();
+	for (Expense expense: expenses) {
+	    if (expense.getEmployee() == employee) {
+		myExpenses.add(expense);
+	    }
+	}
+        return employeeExpenses;
+    }
+
+    static void printExpensesForEmployee(Employee employee) {
+	List<Expense> employeeExpenses = getExpensesForEmployee(employee);
+	for (Expense expense: employeeExpenses) {
+	    System.out.println(expense);
+	}
+    }
+
+    public static void main(String[] args) {
+        input = new Scanner(System.in);
+        employees = new ArrayList<Employee>();
+
+	loadData();
+        System.out.println("Welcome to mainApp!");
+        mainMenu();
+
+	// just random testing. erase later.
+	for (Employee employee: employees) {
+	    System.out.println(employee);
+	}
+    }
+}
