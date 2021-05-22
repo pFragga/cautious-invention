@@ -1,0 +1,81 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class mainApp {
+
+    private static Scanner input;
+
+    static void mainMenu() {
+        int menu;
+        System.out.println("Enter number to continue"
+                           +"\n1: Add new expense type"
+                           +"\n2: Add new employee"
+                           +"\n3: Add new employee expense"
+                           +"\n4: Add new downpayment transaction"
+                           +"\n5: Print employees' expenses"
+                           +"\n6: Clear employee's expenses"
+                           +"\n7: Print employees' transactions"
+                           +"\n8: Clear all company's employees' expenses"
+                           +"\n9: Print final monthly sum of all employees");
+        menu = input.nextInt();
+        switch(menu) {
+                case 2: 
+                    newEmployee();
+                    break;
+                default:
+                    System.out.println("Invalid number!");
+                    mainMenu();
+        }
+    }
+    
+    static void newEmployee() {
+        System.out.println("Enter employee's last name:");
+        String a = input.nextLine();
+        System.out.println("Enter employee's first name");
+        String b = input.nextLine();
+        System.out.println("Enter employee's first name");
+        double c = input.nextDouble();
+        AccountingDepartment.addEmployee(new Emp(a, b, c));
+}
+    
+    
+
+    
+
+    
+
+    class Emp {
+        private String name, surname;
+        private double maxMonthlyTotal;
+
+        public Emp (String n, String s, double max) {
+            name = n;
+            surname = s;
+            maxMonthlyTotal = max;
+        }
+    }
+
+
+    class AccountingDepartment {
+        private ArrayList<Emp> employees;
+
+        public AccountingDepartment() {
+            this.employees = new ArrayList<Emp>();
+        }
+
+        public void addEmployee(final Emp a) {
+            this.employees.add(a);
+        }
+
+    }
+
+    
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Welcome to mainApp!");
+        mainMenu();
+    }
+
+}
