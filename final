@@ -38,7 +38,7 @@ public static void mainMenu()
 			clearAll();
 			break;
 		 case 9:
-		  printAll();
+		 	printAll();
 			break;
 		 default:
 			System.out.println("Invalid number!");
