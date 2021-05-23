@@ -338,7 +338,7 @@ public class MainApp {
         employees.add(new Employee(a, b, c));
     }
 
-	/*void newExpenseType() {
+	void newExpenseType() {
 		System.out.print("Enter ID: ");
 		int a = input.nextInt();
 		input.nextLine();//skip new line
@@ -350,21 +350,12 @@ public class MainApp {
 		input.nextLine();//skip new line
 
 		expenseTypes.add(new (a, b, c));
-	}*/
+	}
 
 	void printExpenses() {
-		/*List<Expense> employeeExpenses = getExpensesForEmployee(employee);
-			for (Expense expense: employeeExpenses) {
-		System.out.println(expense); //changed expense to expense.toString()
-		}*/
-
 		for(Expense expense : expenses) {
 			System.out.println(expense);
-		}
-
-		/*for (int i=0; i < employees.size(); i++) {
-			System.out.println();
-		}*/
+		}	
     }
 
 	List<Expense> getExpensesForEmployee(Employee employee) {
@@ -374,6 +365,75 @@ public class MainApp {
 				employeeExpenses.add(expense);
 			}
 		}
+        return employeeExpenses;
+    }
+
+	void printTransaction() {
+		System.out.print("Select Employee: ");
+
+	}
+
+    public void mainMenu() {
+        int menu;
+	
+		do {
+			System.out.println("Main Menu"
+			       +"\n1: Add new expense type"
+			       +"\n2: Add new employee"
+			       +"\n3: Add new employee expense"
+			       +"\n4: Add new downpayment transaction"
+			       +"\n5: Print employees' expenses"
+			       +"\n6: Clear employee's expenses"
+			       +"\n7: Print employees' transactions"
+			       +"\n8: Clear all company's employees' expenses"
+			       +"\n9: Print final monthly sum of all employees"
+			       +"\n0: exit");
+			System.out.print("Enter selection to continue [0-9]: ");
+			menu = input.nextInt();
+			input.nextLine(); //skip new line
+			switch (menu) {
+				case 1:
+					newExpenseType();
+					break;
+				case 2: 
+					newEmployee();
+					break;
+				case 3:
+					newExpense();
+					break;
+				case 4:
+					newDownpayment();
+					break;
+				case 5: 
+					printExpenses();
+					break;
+				case 6: 
+					clearExpenses();
+					break;
+				case 7: 
+					printTransactions();
+					break;
+				case 8:
+					clearAll();
+					break;
+				case 9:
+					printAll();
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Invalid number!");
+			}
+		} while (menu != 0);
+	}
+
+	public static void main(String[] args) {
+        System.out.println("Welcome to MainApp!");
+		MainApp myapp = new MainApp();
+        myapp.mainMenu();
+		myapp.loadData();
+    }
+}
         return employeeExpenses;
     }
 
