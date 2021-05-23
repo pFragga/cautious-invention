@@ -30,8 +30,8 @@ abstract class ExpenseType {
 
 	public ExpenseType (int ID, String desc, double maxMonthlyExpense) {
 		this.ID = ID;
-    		this.desc = desc;
-        	this.maxMonthlyExpense = maxMonthlyExpense;
+    	this.desc = desc;
+        this.maxMonthlyExpense = maxMonthlyExpense;
 	}
 
 	public String getDescription () {
@@ -64,9 +64,8 @@ class ExpenseType1 extends ExpenseType {
 		return  quantity * this.price;
 	}
 
-	@Override
 	public String toString() {
-		return "Price per unit: " + this.price + this.unitOfMeasurement;
+		return "Price per unit: " + this.price + "/" + this.unitOfMeasurement;
 	}
 }
 
@@ -86,7 +85,6 @@ class ExpenseType2 extends ExpenseType {
 		return (n * this.rate) / 100;
 	}
 
-	@Override
 	public String toString() {
 		return "Rate in percentage: " + this.rate + "%";
 	}
@@ -94,9 +92,9 @@ class ExpenseType2 extends ExpenseType {
 
 //Expense class
 class Expense {
-    	private Employee employee;
-    	private ExpenseType expenseType;
-    	private double amount;
+    private Employee employee;
+    private ExpenseType expenseType;
+    private double amount;
 	private String reason;
 
 	public Expense (Employee emp, ExpenseType type, double amount, String reason) {
@@ -106,18 +104,18 @@ class Expense {
 		this.reason = reason;
 	}
 
-    	public Employee getEmployee() {
+    public Employee getEmployee() {
 		return employee;
-    	}
+    }
 
 	public ExpenseType getExpenseType () {
 		return this.expenseType; 
 	}
 
-    	public String toString() {
-		return employee + " spent " + amount + " for " + expenseType + " , the reason being: " + reason;
-    	}
-	}
+    public String toString() {
+		return employee + " spent " + amount + "$, the reason being: " + reason + " " + expenseType;
+    }
+}
 	
 //Transaction class
 abstract class Transaction {
@@ -197,6 +195,7 @@ class Finalised extends Transaction {
 	}
 }
 
+//MainApp class
 public class MainApp {
     Scanner input;
     ArrayList<Employee> employees;
@@ -204,6 +203,7 @@ public class MainApp {
 	ArrayList<ExpenseType> expenseTypes;
     ArrayList<Transaction> transactions;
 
+    //Load data to create database
     void loadData() {
 		Employee petros = new Employee("Peter", "Frangatzis", 1000);
 		employees.add(petros);
@@ -258,7 +258,7 @@ public class MainApp {
 		Expense e12 = new Expense (john, rec, 1, "day tripper");
 		expenses.add(e12);
     }
-
+	//MainApp Function
     public MainApp() {
         input = new Scanner(System.in);
         employees = new ArrayList<Employee>();
@@ -268,27 +268,51 @@ public class MainApp {
 		loadData();
     }
 	
-	void newEmployee() {
-        	System.out.print("Enter employee's last name: ");
-        	String a = input.nextLine();
-        	System.out.print("Enter employee's first name: ");
-        	String b = input.nextLine();
-        	System.out.print("Enter employee's max monthly compensation: ");
-        	double c = input.nextDouble();
-		input.nextLine(); // clear newline
-        	employees.add(new Employee(a, b, c));
-	}
-	
+    void newEmployee() {
+        System.out.print("Enter employee's last name: ");
+        String a = input.nextLine();//skip new line
+        System.out.print("Enter employee's first name: ");
+        String b = input.nextLine();//skip new line
+        System.out.print("Enter employee's max monthly compensation: ");
+        double c = input.nextDouble();
+		input.nextLine();//skip new line
+        employees.add(new Employee(a, b, c));
+    }
+
 	void newExpenseType() {
-		System.out.print("Enter ID")
+		System.out.print("Enter ID: ");
+		int a = input.nextInt();
+		input.nextLine();//skip new line
+		System.out.print("Enter description of expense type: ");
+		String b = input.nextLine();
+		input.nextLine();//skip new line
+		System.out.print("Enter maximum monthly expense of expense type: ");
+		Double c = input.nextDouble();
+		input.nextLine();//skip new line
+		int type = selectExpenseType();
+
+		if (type == 1) {
+			System.out.print("Enter price: ");
+			double p = input.nextDouble();
+			input.nextLine();//skip new line
+			System.out.print("Enter unit of measurement: ");
+			String u = input.nextLine();
+			input.nextLine();//skip new line
+			expenseTypes.add(new ExpenseType1(a, b, c, p, u));
+		} else {
+			System.out.print("Enter rate: ");
+			double r = input.nextDouble();
+			input.nextLine();
+			expenseTypes.add(new ExpenseType2(a, b, c, r));
+		}
 	}
-	
-	void newTransaction() {
-		System.out.print("Select Employee")
-	}
-	
-	
-	
+
+	void printExpenses() {
+		for(Expense expense : expenses) {
+			System.out.println(expense);
+		}	
+    }
+
     public void mainMenu() {
         int menu;
 	
@@ -306,7 +330,7 @@ public class MainApp {
 			       +"\n0: exit");
 			System.out.print("Enter selection to continue [0-9]: ");
 			menu = input.nextInt();
-			input.nextLine(); // skip newline
+			input.nextLine(); //skip new line
 			switch (menu) {
 				case 1:
 					newExpenseType();
@@ -342,8 +366,8 @@ public class MainApp {
 			}
 		} while (menu != 0);
 	}
-    
-    List<Expense> getExpensesForEmployee(Employee employee) {
+
+	List<Expense> getExpensesForEmployee(Employee employee) {
 		List<Expense> employeeExpenses = new ArrayList<Expense>();
 		for (Expense expense: expenses) {
 			if (expense.getEmployee() == employee) {
@@ -353,16 +377,69 @@ public class MainApp {
         return employeeExpenses;
     }
 
-    void printExpenses(Employee employee) {
-		List<Expense> employeeExpenses = getExpensesForEmployee(employee);
-			for (Expense expense: employeeExpenses) {
-		System.out.println(expense.toString()); //changed expense to expense.toString()
-		}
+	Employee selectEmployee() {
+        int i = 1;
+        boolean flag;
+
+        for (Employee employee : employees) {
+            System.out.println(i+". "+employee.toString());
+            //changed employee to employee.toString()
+            i++;
+        }
+		
+		Employee employee;
+      
+        do {
+            System.out.print("Enter number to select employee: ");
+            int index = input.nextInt();
+            input.nextLine(); // skip newline
+            if (index-1 <= employees.size() && index >= 1)  {
+                employee = employees.get(index-1);
+                flag = true;
+            }
+            /* elseif (index=0) {
+                    mainMenu();
+            }
+            can that work since function returns nothing? */
+            else {
+                System.out.print("Invalid number!");
+                flag = false;
+            }
+        } while (!flag);
+           
+        return employee;
     }
 
-    public static void main(String[] args) {
-        System.out.println("Welcome to mainApp!");
-	MainApp myapp = new MainApp();
+	int selectExpenseType() {
+        boolean flag;
+		int menu;
+        System.out.println("Expense Type"
+                            +"\n1: expense defined by quantinty"
+                            +"\n2: expense defined by value"
+                            +"\n0: return to main menu");
+        do {
+            System.out.print("Enter selection to continue [0-2]: ");
+            menu = input.nextInt();
+            input.nextLine(); // skip newline
+            if (menu == 0){
+                mainMenu();
+            }
+            else if (menu == 1 || menu == 2) {
+                flag = true;
+            }
+            else {
+                flag = false;
+            }
+        } while (!flag);
+
+		return menu;
+    }
+
+
+	public static void main(String[] args) {
+        System.out.println("Welcome to MainApp!");
+		MainApp myapp = new MainApp();
         myapp.mainMenu();
+		myapp.loadData();
     }
 }
