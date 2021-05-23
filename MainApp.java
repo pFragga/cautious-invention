@@ -267,18 +267,28 @@ public class MainApp {
 		transactions = new ArrayList<Transaction>();
 		loadData();
     }
-
-    void newEmployee() {
-        System.out.print("Enter employee's last name: ");
-        String a = input.nextLine();
-        System.out.print("Enter employee's first name: ");
-        String b = input.nextLine();
-        System.out.print("Enter employee's max monthly compensation: ");
-        double c = input.nextDouble();
+	
+	void newEmployee() {
+        	System.out.print("Enter employee's last name: ");
+        	String a = input.nextLine();
+        	System.out.print("Enter employee's first name: ");
+        	String b = input.nextLine();
+        	System.out.print("Enter employee's max monthly compensation: ");
+        	double c = input.nextDouble();
 		input.nextLine(); // clear newline
-        employees.add(new Employee(a, b, c));
-    }
-
+        	employees.add(new Employee(a, b, c));
+	}
+	
+	void newExpenseType() {
+		System.out.print("Enter ID")
+	}
+	
+	void newTransaction() {
+		System.out.print("Select Employee")
+	}
+	
+	
+	
     public void mainMenu() {
         int menu;
 	
