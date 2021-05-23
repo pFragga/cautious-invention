@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//Employee class
 class Employee {
     private String name, surname;
     private double maxMonthlyTotal;
@@ -10,21 +11,118 @@ class Employee {
 		this.name = n;
 		this.surname = s;
 		this.maxMonthlyTotal = maxMonthlyTotal;
-    }
-    //do we need this?
+    }//do we need "this."?
 
     public double getMaxMonthlyTotal() {
-		return this.maxMonthlyTotal;
+	return this.maxMonthlyTotal;
     }
 
     public String toString() {
-		return name + " " + surname;
+	return name + " " + surname;
     }
 }
 
+//ExpenseType class
 abstract class ExpenseType {
+	private int ID;
+    private String desc;
+    private double maxMonthlyExpense;
+
+	public ExpenseType (int ID, String desc, double maxMonthlyExpense) {
+		this.ID = ID;
+        this.desc = desc;
+        this.maxMonthlyExpense = maxMonthlyExpense;
+	}
+
+	public String getDescription () {
+		return this.desc;
+	}
+
+	public double getMaxMonthlyExpense () {
+		return this.maxMonthlyExpense;
+	}
+
+	public String toString () {
+		return this.ID + " " + this.desc + " " + this.maxMonthlyExpense;
+	}
+}
+
+//ExpenseType1 class
+class ExpenseType1 extends ExpenseType {
+	private double price, unitNo;
+	public ExpenseType1(int ID, String desc, double maxMonthlyExpense, double p, double unit) {
+		super(ID, desc, maxMonthlyExpense);
+		this.price = p;
+		this.unitNo = unit;
+	}
+
+	public double getPrice () {
+		return this.price;
+	}
+
+	public double getUnitNo () {
+		return this.unitNo;
+	}
+
+	public double calcValue (double quantity) {
+		return  quantity * this.price;
+	}
+
+	@Override
+	public String toString() {
+		return "Price per unit: " + this.price + " Number of units: " + this.unitNo;
+	}
+
+//ExpenseType2 class
+class ExpenseType2 extends ExpenseType {
+	private double rate;
+	public ExpenseType2(int ID, String desc, double maxMonthlyExpense, double rate) {
+		super(ID, desc, maxMonthlyExpense);
+		this.rate = rate;
+	}
+
+	public double getRate() {
+		return this.rate;
+	}
+
+	public double calcValue (double n) {
+		return (n * this.rate) / 100;
+	}
+
+	@Override
+	public String toString() {
+		return "Rate in percentage: " + this.rate + "%";
+	}
 
 }
+
+}
+
+//Expense class
+class Expense {
+    private Employee employee;
+    private ExpenseType expenseType;
+    private double amount;
+	private String reason;
+
+	public Expense (Employee emp, ExpenseType type, double amount, String reason) {
+		this.employee = emp;
+		this.expenseType = type;
+		this.amount = amount;
+		this.reason = reason;
+	}
+
+    public Employee getEmployee() {
+		return employee;
+    }
+
+	public ExpenseType getExpenseType () {
+		return this.expenseType; 
+	}
+
+    public String toString() {
+		return employee + " spent " + amount + " for " + expenseType + " , the reason being: " + reason;
+    }
 
 abstract class Transaction {
 	private Employee employee;
