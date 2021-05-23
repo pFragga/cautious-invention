@@ -153,6 +153,8 @@ class Difference extends Transaction {
 }
 
 class Compensation extends Transaction {
+	private ExpenseType type;
+
 	public Downpayment(Employee employee, double value, ExpenseType type) {
 		super(employee, value);
 		this.type = type;
