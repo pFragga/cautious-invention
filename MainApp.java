@@ -1,3 +1,8 @@
+/* Omada: 117
+Suggrafeis:
+1100130 - Theodoros Balas
+3200234 - Peter Frangatzis
+*/
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -213,7 +218,7 @@ public class MainApp {
 		employees.add(karl);
 		Employee john = new Employee("John", "Lenon", 800);
 		employees.add(john);
-		ExpenseType1 travel = new ExpenseType1(2368, "travel", 1000, 10, "km");
+		ExpenseType1 travel = new ExpenseType1(2368, "travel", 1000, 10, "kms");
 		expenseTypes.add(travel);
 		ExpenseType1 food = new ExpenseType1(1542, "food", 500, 50, "meal");
 		expenseTypes.add(food);
