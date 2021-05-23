@@ -274,7 +274,8 @@ public class MainApp {
     void printExpenses(Employee employee) {
 	List<Expense> employeeExpenses = getExpensesForEmployee(employee);
 	for (Expense expense: employeeExpenses) {
-	System.out.println(expense);
+	System.out.println(expense.tostring);
+	//changed expense to expense.tostring
 	}
     }
 
