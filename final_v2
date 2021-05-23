@@ -26,18 +26,47 @@ abstract class ExpenseType {
 
 }
 
-class Expense {
-    Employee employee;
-    ExpenseType expenseType;
-    double amount;
+abstract class Transaction {
+	private Employee employee;
+	private double value;
 
-    public Employee getEmployee() {
-		return employee;
-    }
+	public Trans(Employee employee, double value) {
+		this.employee = employee;
+		this.value = value;
+	}
 
-    public String toString() {
-		return employee + " spent " + amount + " for " + expenseType;
-    }
+	public Emp getEmployee() {
+		return this.employee;
+	}
+
+	public double getValue() {
+		return this.value;
+	}
+}
+
+class Downpayment extends Transaction {
+	public Downpayment(Employee employee, double value) {
+		super(employee, value);
+	}
+}
+
+class Difference extends Transaction {
+	public Difference(Employee employee, double value) {
+		super(employee, value);
+	}
+}
+
+class Compensation extends Transaction {
+	public Downpayment(Employee employee, double value, ExpenseType type) {
+		super(employee, value);
+		this.type = type;
+	}
+}
+
+class Finalised extends Transaction {
+	public Finalised(Employee employee, double value) {
+		super(employee, value);
+	}
 }
 
 public class MainApp {
