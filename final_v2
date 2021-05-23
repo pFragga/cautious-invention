@@ -126,7 +126,7 @@ abstract class Transaction {
 	private Employee employee;
 	private double value;
 
-	public Trans(Employee employee, double value) {
+	public Transaction(Employee employee, double value) {
 		this.employee = employee;
 		this.value = value;
 	}
