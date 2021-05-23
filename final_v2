@@ -14,24 +14,24 @@ class Employee {
     }//do we need "this."?
 
     public double getMaxMonthlyTotal() {
-		return this.maxMonthlyTotal;
+	return this.maxMonthlyTotal;
     }
 
     public String toString() {
-		return name + " " + surname;
+	return name + " " + surname;
     }
 }
 
 //ExpenseType class
 abstract class ExpenseType {
 	private int ID;
-	private String desc;
-	private double maxMonthlyExpense;
+    private String desc;
+    private double maxMonthlyExpense;
 
 	public ExpenseType (int ID, String desc, double maxMonthlyExpense) {
 		this.ID = ID;
-        	this.desc = desc;
-        	this.maxMonthlyExpense = maxMonthlyExpense;
+        this.desc = desc;
+        this.maxMonthlyExpense = maxMonthlyExpense;
 	}
 
 	public String getDescription () {
@@ -72,6 +72,7 @@ class ExpenseType1 extends ExpenseType {
 	public String toString() {
 		return "Price per unit: " + this.price + " Number of units: " + this.unitNo;
 	}
+}
 
 //ExpenseType2 class
 class ExpenseType2 extends ExpenseType {
@@ -93,16 +94,13 @@ class ExpenseType2 extends ExpenseType {
 	public String toString() {
 		return "Rate in percentage: " + this.rate + "%";
 	}
-
-}
-
 }
 
 //Expense class
 class Expense {
-	private Employee employee;
-    	private ExpenseType expenseType;
-    	private double amount;
+    private Employee employee;
+    private ExpenseType expenseType;
+    private double amount;
 	private String reason;
 
 	public Expense (Employee emp, ExpenseType type, double amount, String reason) {
@@ -112,17 +110,17 @@ class Expense {
 		this.reason = reason;
 	}
 
-    	public Employee getEmployee() {
+    public Employee getEmployee() {
 		return employee;
-    	}
+    }
 
 	public ExpenseType getExpenseType () {
 		return this.expenseType; 
 	}
 
-    	public String toString() {
+    public String toString() {
 		return employee + " spent " + amount + " for " + expenseType + " , the reason being: " + reason;
-    	}
+    }
 
 abstract class Transaction {
 	private Employee employee;
