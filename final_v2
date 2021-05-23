@@ -30,7 +30,7 @@ abstract class ExpenseType {
 	public ExpenseType (String expenseType, String desc, double maxMonthlyExpense) {
 		this.expenseType = expenseType;
     		this.desc = desc;
-        this.maxMonthlyExpense = maxMonthlyExpense;
+        	this.maxMonthlyExpense = maxMonthlyExpense;
 	}
 
 	public String getDescription () {
