@@ -73,6 +73,7 @@ public class MainApp {
     Scanner input;
     ArrayList<Employee> employees;
     ArrayList<Expense> expenses;
+    ArrayList<Transaction> transactions;
 
     void loadData() {
 		Employee petros = new Employee("peter", "fraggatzis", 1000);
