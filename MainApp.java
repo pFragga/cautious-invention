@@ -405,7 +405,7 @@ public class MainApp {
 				case 5: 
 					printExpenses();
 					break;
-				case 6: 
+				/*case 6: 
 					clearExpenses();
 					break;
 				case 7: 
@@ -416,7 +416,7 @@ public class MainApp {
 					break;
 				case 9:
 					printAll();
-					break;
+					break;*/
 				case 0:
 					break;
 				default:
