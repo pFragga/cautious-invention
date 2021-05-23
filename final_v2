@@ -117,8 +117,8 @@ class Expense {
     	public String toString() {
 		return employee + " spent " + amount + " for " + expenseType + " , the reason being: " + reason;
     	}
-}
-
+	}
+	
 //Transaction class
 abstract class Transaction {
 	private Employee employee;
@@ -185,6 +185,7 @@ class Compensation extends Transaction {
 
 
 }
+
 //Finalised class
 class Finalised extends Transaction {
 	public Finalised(Employee employee, double value) {
@@ -195,12 +196,13 @@ class Finalised extends Transaction {
 		return "Final compensation for " + this.getEmployee() + " => " + this.getValue();
 	}
 }
+
 public class MainApp {
     Scanner input;
     ArrayList<Employee> employees;
     ArrayList<Expense> expenses;
+	ArrayList<ExpenseType> expenseTypes;
     ArrayList<Transaction> transactions;
-    ArrayList<ExpenseType> expenseTypes;
 
     void loadData() {
 		Employee petros = new Employee("Peter", "Frangatzis", 1000);
@@ -219,7 +221,7 @@ public class MainApp {
 		expenseTypes.add(rec);
 		ExpenseType2 health = new ExpenseType2 (6589, "healthcare", 700, 0.5);
 		expenseTypes.add(health);
-		ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 0.6)
+		ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 0.6);
 		expenseTypes.add(ins);
 		ExpenseType2 wfh = new ExpenseType2 (5658, "working from home", 1000, 0.8);
 		expenseTypes.add(wfh);
@@ -261,6 +263,8 @@ public class MainApp {
         input = new Scanner(System.in);
         employees = new ArrayList<Employee>();
 		expenses = new ArrayList<Expense>();
+		expenseTypes = new ArrayList<ExpenseType>();
+		transactions = new ArrayList<Transaction>();
 		loadData();
     }
 
@@ -328,28 +332,22 @@ public class MainApp {
 			}
 		} while (menu != 0);
 	}
-
-	// XXX just random testing. erase later.
-	for (Employee employee: employees) {
-	    System.out.println(employee);
-	}
     
     List<Expense> getExpensesForEmployee(Employee employee) {
 		List<Expense> employeeExpenses = new ArrayList<Expense>();
 		for (Expense expense: expenses) {
 			if (expense.getEmployee() == employee) {
-			employeeExpenses.add(expense);
+				employeeExpenses.add(expense);
 			}
 		}
         return employeeExpenses;
     }
 
     void printExpenses(Employee employee) {
-	List<Expense> employeeExpenses = getExpensesForEmployee(employee);
-	for (Expense expense: employeeExpenses) {
-	System.out.println(expense.tostring);
-	//changed expense to expense.tostring
-	}
+		List<Expense> employeeExpenses = getExpensesForEmployee(employee);
+			for (Expense expense: employeeExpenses) {
+		System.out.println(expense.toString()); //changed expense to expense.toString()
+		}
     }
 
     public static void main(String[] args) {
