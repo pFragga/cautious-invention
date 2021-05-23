@@ -203,7 +203,181 @@ public class MainApp {
 	ArrayList<ExpenseType> expenseTypes;
     ArrayList<Transaction> transactions;
 
-    Employee selectEmployee() {
+    //Load data to create database
+    void loadData() {
+		Employee petros = new Employee("Peter", "Frangatzis", 1000);
+		employees.add(petros);
+		Employee theodore = new Employee("Theodore", "Balas", 600);
+		employees.add(theodore);
+		Employee karl = new Employee("Karl", "Marx", 200);
+		employees.add(karl);
+		Employee john = new Employee("John", "Lenon", 800);
+		employees.add(john);
+		ExpenseType1 travel = new ExpenseType1(2368, "travel", 1000, 10, "km");
+		expenseTypes.add(travel);
+		ExpenseType1 food = new ExpenseType1(1542, "food", 500, 50, "meal");
+		expenseTypes.add(food);
+		ExpenseType1 rec = new ExpenseType1 (6900, "recreation", 400, 100, "activity");
+		expenseTypes.add(rec);
+		ExpenseType2 health = new ExpenseType2 (6589, "healthcare", 700, 0.5);
+		expenseTypes.add(health);
+		ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 0.6);
+		expenseTypes.add(ins);
+		ExpenseType2 wfh = new ExpenseType2 (5658, "working from home", 1000, 0.8);
+		expenseTypes.add(wfh);
+		Downpayment d1 = new Downpayment (karl, 100);
+		transactions.add(d1);
+		Downpayment d2 = new Downpayment (theodore, 500);
+		transactions.add(d2);
+		Downpayment d3 = new Downpayment (petros, 200);
+		transactions.add(d3);
+		Downpayment d4 = new Downpayment (john, 800);
+		transactions.add(d4);
+		Expense e1 = new Expense (theodore, travel, 30, "kms");
+		expenses.add(e1);
+		Expense e2 = new Expense (theodore, food, 5, "meals");
+		expenses.add(e2);
+		Expense e3 = new Expense (theodore, ins, 500, "car");
+		expenses.add(e3);
+		Expense e4 = new Expense (karl, wfh, 500, "screen");
+		expenses.add(e4);
+		Expense e5 = new Expense (karl, health, 400, "check-up");
+		expenses.add(e5);
+		Expense e6 = new Expense (karl, rec, 3, "museum");
+		expenses.add(e6);
+		Expense e7 = new Expense (petros, health, 400, "doctor");
+		expenses.add(e7);
+		Expense e8 = new Expense (petros, ins, 1000, "liability");
+		expenses.add(e8);
+		Expense e9 = new Expense (petros, travel, 20, "kms");
+		expenses.add(e9);
+		Expense e10 = new Expense (john, wfh, 400, "bed");
+		expenses.add(e10);
+		Expense e11 = new Expense (john, wfh, 600, "guitar");
+		expenses.add(e11);
+		Expense e12 = new Expense (john, rec, 1, "day tripper");
+		expenses.add(e12);
+    }
+	//MainApp Function
+    public MainApp() {
+        input = new Scanner(System.in);
+        employees = new ArrayList<Employee>();
+		expenses = new ArrayList<Expense>();
+		expenseTypes = new ArrayList<ExpenseType>();
+		transactions = new ArrayList<Transaction>();
+		loadData();
+    }
+	
+    void newEmployee() {
+        System.out.print("Enter employee's last name: ");
+        String a = input.nextLine();//skip new line
+        System.out.print("Enter employee's first name: ");
+        String b = input.nextLine();//skip new line
+        System.out.print("Enter employee's max monthly compensation: ");
+        double c = input.nextDouble();
+		input.nextLine();//skip new line
+        employees.add(new Employee(a, b, c));
+    }
+
+	void newExpenseType() {
+		System.out.print("Enter ID: ");
+		int a = input.nextInt();
+		input.nextLine();//skip new line
+		System.out.print("Enter description of expense type: ");
+		String b = input.nextLine();
+		input.nextLine();//skip new line
+		System.out.print("Enter maximum monthly expense of expense type: ");
+		Double c = input.nextDouble();
+		input.nextLine();//skip new line
+		int type = selectExpenseType();
+
+		if (type == 1) {
+			System.out.print("Enter price: ");
+			double p = input.nextDouble();
+			input.nextLine();//skip new line
+			System.out.print("Enter unit of measurement: ");
+			String u = input.nextLine();
+			input.nextLine();//skip new line
+			expenseTypes.add(new ExpenseType1(a, b, c, p, u));
+		} else {
+			System.out.print("Enter rate: ");
+			double r = input.nextDouble();
+			input.nextLine();
+			expenseTypes.add(new ExpenseType2(a, b, c, r));
+		}
+	}
+
+	void printExpenses() {
+		for(Expense expense : expenses) {
+			System.out.println(expense);
+		}	
+    }
+
+    public void mainMenu() {
+        int menu;
+	
+		do {
+			System.out.println("Main Menu"
+			       +"\n1: Add new expense type"
+			       +"\n2: Add new employee"
+			       +"\n3: Add new employee expense"
+			       +"\n4: Add new downpayment transaction"
+			       +"\n5: Print employees' expenses"
+			       +"\n6: Clear employee's expenses"
+			       +"\n7: Print employees' transactions"
+			       +"\n8: Clear all company's employees' expenses"
+			       +"\n9: Print final monthly sum of all employees"
+			       +"\n0: exit");
+			System.out.print("Enter selection to continue [0-9]: ");
+			menu = input.nextInt();
+			input.nextLine(); //skip new line
+			switch (menu) {
+				case 1:
+					newExpenseType();
+					break;
+				case 2: 
+					newEmployee();
+					break;
+				case 3:
+					newExpense();
+					break;
+				case 4:
+					newDownpayment();
+					break;
+				case 5: 
+					printExpenses();
+					break;
+				case 6: 
+					clearExpenses();
+					break;
+				case 7: 
+					printTransactions();
+					break;
+				case 8:
+					clearAll();
+					break;
+				case 9:
+					printAll();
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Invalid number!");
+			}
+		} while (menu != 0);
+	}
+
+	List<Expense> getExpensesForEmployee(Employee employee) {
+		List<Expense> employeeExpenses = new ArrayList<Expense>();
+		for (Expense expense: expenses) {
+			if (expense.getEmployee() == employee) {
+				employeeExpenses.add(expense);
+			}
+		}
+        return employeeExpenses;
+    }
+
+	Employee selectEmployee() {
         int i = 1;
         boolean flag;
 
@@ -261,240 +435,6 @@ public class MainApp {
 		return menu;
     }
 
-
-
-    void loadData() {
-		Employee petros = new Employee("Peter", "Frangatzis", 1000);
-		employees.add(petros);
-		Employee theodore = new Employee("Theodore", "Balas", 600);
-		employees.add(theodore);
-		Employee karl = new Employee("Karl", "Marx", 200);
-		employees.add(karl);
-		Employee john = new Employee("John", "Lenon", 800);
-		employees.add(john);
-		ExpenseType1 travel = new ExpenseType1(2368, "travel", 1000, 10, "km");
-		expenseTypes.add(travel);
-		ExpenseType1 food = new ExpenseType1(1542, "food", 500, 50, "meal");
-		expenseTypes.add(food);
-		ExpenseType1 rec = new ExpenseType1 (6900, "recreation", 400, 100, "activity");
-		expenseTypes.add(rec);
-		ExpenseType2 health = new ExpenseType2 (6589, "healthcare", 700, 0.5);
-		expenseTypes.add(health);
-		ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 0.6);
-		expenseTypes.add(ins);
-		ExpenseType2 wfh = new ExpenseType2 (5658, "working from home", 1000, 0.8);
-		expenseTypes.add(wfh);
-		Downpayment d1 = new Downpayment (karl, 100);
-		transactions.add(d1);
-		Downpayment d2 = new Downpayment (theodore, 500);
-		transactions.add(d2);
-		Downpayment d3 = new Downpayment (petros, 200);
-		transactions.add(d3);
-		Downpayment d4 = new Downpayment (john, 800);
-		transactions.add(d4);
-		Expense e1 = new Expense (theodore, travel, 30, "kms");
-		expenses.add(e1);
-		Expense e2 = new Expense (theodore, food, 5, "meals");
-		expenses.add(e2);
-		Expense e3 = new Expense (theodore, ins, 500, "car");
-		expenses.add(e3);
-		Expense e4 = new Expense (karl, wfh, 500, "screen");
-		expenses.add(e4);
-		Expense e5 = new Expense (karl, health, 400, "check-up");
-		expenses.add(e5);
-		Expense e6 = new Expense (karl, rec, 3, "museum");
-		expenses.add(e6);
-		Expense e7 = new Expense (petros, health, 400, "doctor");
-		expenses.add(e7);
-		Expense e8 = new Expense (petros, ins, 1000, "liability");
-		expenses.add(e8);
-		Expense e9 = new Expense (petros, travel, 20, "kms");
-		expenses.add(e9);
-		Expense e10 = new Expense (john, wfh, 400, "bed");
-		expenses.add(e10);
-		Expense e11 = new Expense (john, wfh, 600, "guitar");
-		expenses.add(e11);
-		Expense e12 = new Expense (john, rec, 1, "day tripper");
-		expenses.add(e12);
-    }
-
-    public MainApp() {
-        input = new Scanner(System.in);
-        employees = new ArrayList<Employee>();
-		expenses = new ArrayList<Expense>();
-		expenseTypes = new ArrayList<ExpenseType>();
-		transactions = new ArrayList<Transaction>();
-		loadData();
-    }
-
-    void newEmployee() {
-        System.out.print("Enter employee's last name: ");
-        String a = input.nextLine();//skip new line
-        System.out.print("Enter employee's first name: ");
-        String b = input.nextLine();//skip new line
-        System.out.print("Enter employee's max monthly compensation: ");
-        double c = input.nextDouble();
-		input.nextLine();//skip new line
-        employees.add(new Employee(a, b, c));
-    }
-
-	void newExpenseType() {
-		System.out.print("Enter ID: ");
-		int a = input.nextInt();
-		input.nextLine();//skip new line
-		System.out.print("Enter description of expense type: ");
-		String b = input.nextLine();
-		input.nextLine();//skip new line
-		System.out.print("Enter maximum monthly expense of expense type: ");
-		Double c = input.nextDouble();
-		input.nextLine();//skip new line
-
-		expenseTypes.add(new (a, b, c));
-	}
-
-	void printExpenses() {
-		for(Expense expense : expenses) {
-			System.out.println(expense);
-		}	
-    }
-
-	List<Expense> getExpensesForEmployee(Employee employee) {
-		List<Expense> employeeExpenses = new ArrayList<Expense>();
-		for (Expense expense: expenses) {
-			if (expense.getEmployee() == employee) {
-				employeeExpenses.add(expense);
-			}
-		}
-        return employeeExpenses;
-    }
-
-	void printTransaction() {
-		System.out.print("Select Employee: ");
-
-	}
-
-    public void mainMenu() {
-        int menu;
-	
-		do {
-			System.out.println("Main Menu"
-			       +"\n1: Add new expense type"
-			       +"\n2: Add new employee"
-			       +"\n3: Add new employee expense"
-			       +"\n4: Add new downpayment transaction"
-			       +"\n5: Print employees' expenses"
-			       +"\n6: Clear employee's expenses"
-			       +"\n7: Print employees' transactions"
-			       +"\n8: Clear all company's employees' expenses"
-			       +"\n9: Print final monthly sum of all employees"
-			       +"\n0: exit");
-			System.out.print("Enter selection to continue [0-9]: ");
-			menu = input.nextInt();
-			input.nextLine(); //skip new line
-			switch (menu) {
-				case 1:
-					newExpenseType();
-					break;
-				case 2: 
-					newEmployee();
-					break;
-				case 3:
-					newExpense();
-					break;
-				case 4:
-					newDownpayment();
-					break;
-				case 5: 
-					printExpenses();
-					break;
-				case 6: 
-					clearExpenses();
-					break;
-				case 7: 
-					printTransactions();
-					break;
-				case 8:
-					clearAll();
-					break;
-				case 9:
-					printAll();
-					break;
-				case 0:
-					break;
-				default:
-					System.out.println("Invalid number!");
-			}
-		} while (menu != 0);
-	}
-
-	public static void main(String[] args) {
-        System.out.println("Welcome to MainApp!");
-		MainApp myapp = new MainApp();
-        myapp.mainMenu();
-		myapp.loadData();
-    }
-}
-        return employeeExpenses;
-    }
-
-	void printTransaction() {
-		System.out.print("Select Employee: ");
-
-	}
-
-    public void mainMenu() {
-        int menu;
-	
-		do {
-			System.out.println("Main Menu"
-			       +"\n1: Add new expense type"
-			       +"\n2: Add new employee"
-			       +"\n3: Add new employee expense"
-			       +"\n4: Add new downpayment transaction"
-			       +"\n5: Print employees' expenses"
-			       +"\n6: Clear employee's expenses"
-			       +"\n7: Print employees' transactions"
-			       +"\n8: Clear all company's employees' expenses"
-			       +"\n9: Print final monthly sum of all employees"
-			       +"\n0: exit");
-			System.out.print("Enter selection to continue [0-9]: ");
-			menu = input.nextInt();
-			input.nextLine(); //skip new line
-			switch (menu) {
-				/*case 1:
-					newExpenseType();
-					break;*/
-				case 2: 
-					newEmployee();
-					break;
-				/*case 3:
-					newExpense();
-					break;
-				case 4:
-					newDownpayment();
-					break;*/
-				case 5: 
-					printExpenses();
-					break;
-				/*case 6: 
-					clearExpenses();
-					break;
-				case 7: 
-					printTransactions();
-					break;
-				case 8:
-					clearAll();
-					break;
-				case 9:
-					printAll();
-					break;*/
-				case 0:
-					break;
-				default:
-					System.out.println("Invalid number!");
-			}
-		} while (menu != 0);
-	}
 
 	public static void main(String[] args) {
         System.out.println("Welcome to MainApp!");
