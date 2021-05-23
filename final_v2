@@ -43,21 +43,21 @@ abstract class ExpenseType {
 	}
 }
 
-//ExpenseType1 class
 class ExpenseType1 extends ExpenseType {
-	private double price, unitNo;
-	public ExpenseType1(int ID, String desc, double maxMonthlyExpense, double p, double unit) {
+	private double price;
+	private String unitOfMeasurement;
+	public ExpenseType1(int ID, String desc, double maxMonthlyExpense, double p, String unit) {
 		super(ID, desc, maxMonthlyExpense);
-		this.price = p;
-		this.unitNo = unit;
+		price = p;
+		unitOfMeasurement = unit;
 	}
 
 	public double getPrice () {
 		return this.price;
 	}
 
-	public double getUnitNo () {
-		return this.unitNo;
+	public String getUnitMeasurement () {
+		return this.unitOfMeasurement;
 	}
 
 	public double calcValue (double quantity) {
@@ -66,7 +66,7 @@ class ExpenseType1 extends ExpenseType {
 
 	@Override
 	public String toString() {
-		return "Price per unit: " + this.price + " Number of units: " + this.unitNo;
+		return "Price per unit: " + this.price + this.unitOfMeasurement;
 	}
 }
 
