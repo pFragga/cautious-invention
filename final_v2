@@ -41,10 +41,6 @@ abstract class ExpenseType {
 	public double getMaxMonthlyExpense () {
 		return this.maxMonthlyExpense;
 	}
-
-	public String toString () {
-		return this.ID + " " + this.desc + " " + this.maxMonthlyExpense;
-	}
 }
 
 //ExpenseType1 class
