@@ -269,7 +269,7 @@ public class MainApp {
         return employeeExpenses;
     }
 
-    void printExpensesForEmployee(Employee employee) {
+    void printExpenses(Employee employee) {
 	List<Expense> employeeExpenses = getExpensesForEmployee(employee);
 	for (Expense expense: employeeExpenses) {
 	System.out.println(expense);
