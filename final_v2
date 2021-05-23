@@ -24,11 +24,12 @@ class Employee {
 
 //ExpenseType class
 abstract class ExpenseType {
-	private String expenseType, desc;
+	private int ID;
+	private String desc;
 	private double maxMonthlyExpense;
 
-	public ExpenseType (String expenseType, String desc, double maxMonthlyExpense) {
-		this.expenseType = expenseType;
+	public ExpenseType (int ID, String desc, double maxMonthlyExpense) {
+		this.ID = ID;
     		this.desc = desc;
         	this.maxMonthlyExpense = maxMonthlyExpense;
 	}
