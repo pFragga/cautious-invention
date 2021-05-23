@@ -310,7 +310,60 @@ public class MainApp {
 	void printExpenses() {
 		for(Expense expense : expenses) {
 			System.out.println(expense);
-		}	
+		}
+		
+	void newDownpayment() {
+		boolean flag;
+		Employee emp = selectEmployee();
+		
+		System.out.print("Please enter value of downpayment (or 0 to return to main menu): ");
+		do {
+			double value = input.nextInt();
+			input.nextLine(); // skip newline
+			if (value == 0) {
+				mainMenu();
+			}
+			else if (value < 0) {
+				System.out.print("Invalid number - value must be positive!\nPlease enter value of downpayment (or 0 to return to main menu): ");
+                flag = false;
+			}
+			else {
+				flag = true;
+			}
+		} while (!flag);
+			
+		Downpayment d = new Downpayment(value, emp);
+	}
+	
+	void newExpense() {
+		boolean flag;
+		
+		Employee emp = selectEmployee();
+		
+		ExpenseType et = selectExpType();
+		
+		System.out.print("Enter expense quantinty or value to continue (or 0 to return to main menu): ");
+		do {
+			int quant = input.nextInt();
+			input.nextInt(); // skip newline
+			if (value = 0){
+				mainMenu();
+			}
+			else if (value < 0) {
+				System.out.print("Invalid number - value/quantinty must be positive!\nPlease enter a positive number (or 0 to return to main menu): ");
+                flag = false;
+			else {
+				flag = true;
+			}
+		} while (!flag);
+		
+		System.out.print("Enter expense description: ");
+		int reason = input.nextLine();
+		input.nextLine(); // skip newline
+		
+		Expense e = new Expense(emp, et, quant, reason);  
+	}
+		
     }
 
     public void mainMenu() {
