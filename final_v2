@@ -118,6 +118,7 @@ class Expense {
 		return employee + " spent " + amount + " for " + expenseType + " , the reason being: " + reason;
     	}
 
+//Transaction class
 abstract class Transaction {
 	private Employee employee;
 	private double value;
@@ -127,42 +128,72 @@ abstract class Transaction {
 		this.value = value;
 	}
 
-	public Emp getEmployee() {
+	public Employee getEmployee() {
 		return this.employee;
 	}
 
 	public double getValue() {
 		return this.value;
 	}
+
+	public String toString() {
+		return "Transaction of " + this.getValue() + " made by " + this.getEmployee();
+	}
 }
 
+//Downpayment class
 class Downpayment extends Transaction {
 	public Downpayment(Employee employee, double value) {
 		super(employee, value);
 	}
+
+	@Override
+	public String toString() {
+		return this.getEmployee() + " made a down payment of " + this.getValue();
+	}
 }
 
+//Difference class
 class Difference extends Transaction {
 	public Difference(Employee employee, double value) {
 		super(employee, value);
 	}
-}
 
-class Compensation extends Transaction {
-	private ExpenseType type;
-
-	public Downpayment(Employee employee, double value, ExpenseType type) {
-		super(employee, value);
-		this.type = type;
+	@Override
+	public String toString() {
+		return this.getEmployee() + " spent " + this.getValue() + " over his maximum monthly expense limit";
 	}
 }
 
+//Compensation class
+class Compensation extends Transaction {
+	private ExpenseType expenseType;
+	public Compensation(Employee employee, double value, ExpenseType type) {
+		super(employee, value);
+		this.expenseType = type;
+	}
+
+	public ExpenseType getExpenseType() {
+		return this.expenseType;
+	}
+
+	@Override
+	public String toString() {
+		return this.getValue() + " Compensation of " + this.getExpenseType() + " by " + this.getEmployee();
+	}
+
+
+}
+//Finalised class
 class Finalised extends Transaction {
 	public Finalised(Employee employee, double value) {
 		super(employee, value);
 	}
-}
 
+	public String toString() {
+		return "Final compensation for " + this.getEmployee() + " => " + this.getValue();
+	}
+}
 public class MainApp {
     Scanner input;
     ArrayList<Employee> employees;
