@@ -170,14 +170,58 @@ public class MainApp {
     ArrayList<Transaction> transactions;
 
     void loadData() {
-		Employee petros = new Employee("peter", "fraggatzis", 1000);
+		Employee petros = new Employee("Peter", "Frangatzis", 1000);
 		employees.add(petros);
-		Employee theodore = new Employee("theo", "dore", 100);
+		Employee theodore = new Employee("Theodore", "Balas", 600);
 		employees.add(theodore);
-		Employee filimon = new Employee("filimon", "fraggatzis", 500);
-		employees.add(filimon);
-		Employee lilia = new Employee("lilia", "mavros", 500000);
-		employees.add(lilia);
+		Employee karl = new Employee("Karl", "Marx", 200);
+		employees.add(karl);
+		Employee john = new Employee("John", "Lenon", 800);
+		employees.add(john);
+		ExpenseType1 travel = new ExpenseType1(2368, "travel", 1000, 10, "km");
+		expenseTypes.add(travel);
+		ExpenseType1 food = new ExpenseType1(1542, "food", 500, 50, "meal");
+		expenseTypes.add(food);
+		ExpenseType1 rec = new ExpenseType1 (6900, "recreation", 400, 100, "activity");
+		expenseTypes.add(rec);
+		ExpenseType2 health = new ExpenseType2 (6589, "healthcare", 700, 0.5);
+		expenseTypes.add(health);
+		ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 0.6)
+		expenseTypes.add(ins);
+		ExpenseType2 wfh = new ExpenseType2 (5658, "working from home", 1000, 0.8);
+		expenseTypes.add(wfh);
+		Downpayment d1 = new Downpayment (karl, 100);
+		transactions.add(d1);
+		Downpayment d2 = new Downpayment (theodore, 500);
+		transactions.add(d2);
+		Downpayment d3 = new Downpayment (petros, 200);
+		transactions.add(d3);
+		Downpayment d4 = new Downpayment (john, 800);
+		transactions.add(d4);
+		Expense e1 = new Expense (theodore, travel, 30, "kms");
+		expenses.add(e1);
+		Expense e2 = new Expense (theodore, food, 5, "meals");
+		expenses.add(e2);
+		Expense e3 = new Expense (theodore, ins, 500, "car");
+		expenses.add(e3);
+		Expense e4 = new Expense (karl, wfh, 500, "screen");
+		expenses.add(e4);
+		Expense e5 = new Expense (karl, health, 400, "check-up");
+		expenses.add(e5);
+		Expense e6 = new Expense (karl, rec, 3, "museum");
+		expenses.add(e6);
+		Expense e7 = new Expense (petros, health, 400, "doctor");
+		expenses.add(e7);
+		Expense e8 = new Expense (petros, ins, 1000, "liability");
+		expenses.add(e8);
+		Expense e9 = new Expense (petros, travel, 20, "kms");
+		expenses.add(e9);
+		Expense e10 = new Expense (john, wfh, 400, "bed");
+		expenses.add(e10);
+		Expense e11 = new Expense (john, wfh, 600, "guitar");
+		expenses.add(e11);
+		Expense e12 = new Expense (john, rec, 1, "day tripper");
+		expenses.add(e12);
     }
 
     public MainApp() {
