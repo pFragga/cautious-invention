@@ -117,6 +117,7 @@ class Expense {
     	public String toString() {
 		return employee + " spent " + amount + " for " + expenseType + " , the reason being: " + reason;
     	}
+}
 
 //Transaction class
 abstract class Transaction {
@@ -199,6 +200,7 @@ public class MainApp {
     ArrayList<Employee> employees;
     ArrayList<Expense> expenses;
     ArrayList<Transaction> transactions;
+    ArrayList<ExpenseType> expenseTypes;
 
     void loadData() {
 		Employee petros = new Employee("Peter", "Frangatzis", 1000);
@@ -299,7 +301,7 @@ public class MainApp {
 					newEmployee();
 					break;
 				case 3:
-					newExmployeeExp();
+					newExpense();
 					break;
 				case 4:
 					newDownpayment();
