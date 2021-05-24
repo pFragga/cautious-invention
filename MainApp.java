@@ -316,6 +316,7 @@ public class MainApp {
 		for(Expense expense : expenses) {
 			System.out.println(expense);
 		}
+	}
 		
 	void newDownpayment() {
 		boolean flag;
