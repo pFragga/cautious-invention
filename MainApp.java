@@ -340,8 +340,8 @@ public class MainApp {
 			
 		Downpayment d = new Downpayment(value, emp);
 	}
-	
-		void newExpense() {
+		
+	void newExpense() {
 		boolean flag;
 		
 		Employee emp = selectEmployee();
@@ -369,8 +369,6 @@ public class MainApp {
 		
 		Expense e = new Expense(emp, et, quant, reason);  
 	}
-		
-    }
 
     public void mainMenu() {
         int menu;
