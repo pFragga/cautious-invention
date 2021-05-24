@@ -320,11 +320,12 @@ public class MainApp {
 		
 	void newDownpayment() {
 		boolean flag;
+		int value;
 		Employee emp = selectEmployee();
 		
 		System.out.print("Please enter value of downpayment (or 0 to return to main menu): ");
 		do {
-			double value = input.nextInt();
+			value = input.nextInt();
 			input.nextLine(); // skip newline
 			if (value == 0) {
 				mainMenu();
@@ -338,19 +339,20 @@ public class MainApp {
 			}
 		} while (!flag);
 			
-		Downpayment d = new Downpayment(value, emp);
+		Downpayment d = new Downpayment(emp, value);
 	}
 		
 	void newExpense() {
 		boolean flag;
 		int value;
+		int quant;
 		Employee emp = selectEmployee();
 		
 		ExpenseType et = selectExpType();
 		
 		System.out.print("Enter expense quantinty or value to continue (or 0 to return to main menu): ");
 		do {
-			int quant = input.nextInt();
+			quant = input.nextInt();
 			input.nextInt(); // skip newline
 			if (value == 0){
 				mainMenu();
@@ -364,9 +366,9 @@ public class MainApp {
 		} while (!flag);
 		
 		System.out.print("Enter expense description: ");
-		int reason = input.nextInt();
+		String reason = input.nextLine();
 		input.nextLine(); // skip newline
-		
+
 		Expense e = new Expense(emp, et, quant, reason);  
 	}
 
