@@ -523,7 +523,6 @@ public class MainApp {
 			
         	return expenseType;
 		}
-	}
 
 
 	public static void main(String[] args) {
