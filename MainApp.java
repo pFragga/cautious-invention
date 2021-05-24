@@ -484,8 +484,8 @@ public class MainApp {
         boolean flag=true;
 
         for (ExpenseType expenseType : expenseTypes) {
-			System.out.println(i+". "+expenseType.toString());
-			i++;
+            System.out.println(i+". "+expenseType.toString());
+            i++;
         }
 
         ExpenseType expenseType;
@@ -496,7 +496,6 @@ public class MainApp {
             input.nextLine(); // skip newline
             if (index-1 <= expenseTypes.size() && index >= 1)  {
                 expenseType = expenseTypes.get(index-1);
-                flag = true;
             }
             else if (index == 0) {
                 mainMenu();
