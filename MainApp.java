@@ -344,7 +344,6 @@ public class MainApp {
 		
 	void newExpense() {
 		boolean flag;
-		int value;
 		int quant;
 		Employee emp = selectEmployee();
 		
@@ -354,10 +353,10 @@ public class MainApp {
 		do {
 			quant = input.nextInt();
 			input.nextInt(); // skip newline
-			if (value == 0){
+			if (quant == 0){
 				mainMenu();
 			}
-			else if (value < 0) {
+			else if (quant < 0) {
 				System.out.print("Invalid number - value/quantinty must be positive!\nPlease enter a positive number (or 0 to return to main menu): ");
                 flag = false;
 			} else {
@@ -528,7 +527,7 @@ public class MainApp {
 	public static void main(String[] args) {
         System.out.println("Welcome to MainApp!");
 		MainApp myapp = new MainApp();
-        myapp.mainMenu();
+        	myapp.mainMenu();
 		myapp.loadData();
-    }
+    	}
 }
