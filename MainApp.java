@@ -274,12 +274,12 @@ public class MainApp {
 	
     void newEmployee() {
         System.out.print("Enter employee's last name: ");
-        String a = input.nextLine();//skip new line
+        String a = input.nextLine();
         System.out.print("Enter employee's first name: ");
-        String b = input.nextLine();//skip new line
+        String b = input.nextLine();
         System.out.print("Enter employee's max monthly compensation: ");
         double c = input.nextDouble();
-		input.nextLine();//skip new line
+		input.nextLine();
         employees.add(new Employee(a, b, c));
     }
 
@@ -289,7 +289,6 @@ public class MainApp {
         input.nextLine();//skip new line
         System.out.print("Enter description of expense type: ");
         String b = input.nextLine();
-        input.nextLine();//skip new line
         System.out.print("Enter maximum monthly expense of expense type: ");
         Double c = input.nextDouble();
         input.nextLine();//skip new line
@@ -301,12 +300,11 @@ public class MainApp {
             input.nextLine();//skip new line
             System.out.print("Enter unit of measurement: ");
             String u = input.nextLine();
-            input.nextLine();//skip new line
             expenseTypes.add(new ExpenseType1(a, b, c, p, u));
         } else {
             System.out.print("Enter rate: ");
             double r = input.nextDouble();
-            input.nextLine();
+            input.nextLine();//skip new line
             expenseTypes.add(new ExpenseType2(a, b, c, r));
         }
     }
@@ -361,7 +359,6 @@ public class MainApp {
 
         System.out.print("Enter expense description: ");
         String reason = input.nextLine();
-        input.nextLine(); // skip newline
 
         Expense e = new Expense(emp, et, quant, reason);  
     }
@@ -451,8 +448,8 @@ public class MainApp {
             }
             /* elseif (index=0) {
                     mainMenu();
-            }
-            can that work since function returns nothing? */
+			}
+			can that work since function returns nothing? */
             else {
                 System.out.print("Invalid number!");
                 flag = false;
@@ -505,8 +502,8 @@ public class MainApp {
             }
             /* elseif (index==0) {
                 mainMenu();
-            }
-            can that work since function returns nothing? */
+			}
+			can that work since function returns nothing? */
             else {
                 System.out.print("Invalid number!");
                 flag = false;
