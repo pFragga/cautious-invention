@@ -12,10 +12,10 @@ class Employee {
     private String name, surname;
     private double maxMonthlyTotal;
 
-    public Employee(String n, String s, double maxMonthlyTotal) {
+    public Employee(String n, String s, double max) {
             this.name = n;
             this.surname = s;
-            this.maxMonthlyTotal = maxMonthlyTotal;
+            this.maxMonthlyTotal = max;
     }
 
     public double getMaxMonthlyTotal() {
