@@ -398,17 +398,17 @@ public class MainApp {
                     printExpenses();
                     break;
                 /*case 6: 
-                    clearExpenses();
-                    break;
-                case 7: 
-                    printTransactions();
-                    break;
-		case 8:
-                    clearAll();
-                    break;
-		case 9:
-                    printAll();
-                    break;*/
+					clearExpenses();
+					break;
+				case 7: 
+					printTransactions();
+					break;
+				case 8:
+					clearAll();
+					break;
+				case 9:
+					printAll();
+					break;*/
                 case 0:
                     break;
                 default:
@@ -442,12 +442,12 @@ public class MainApp {
             System.out.print("Enter number to select employee: ");
             int index = input.nextInt();
             input.nextLine(); // skip newline
-            if (index-1 <= employees.size() && index >= 1)  {
+            if (index-1 <= employees.size() & index >= 1)  {
                 employee = employees.get(index-1);
             }
-            else if (index == 0) {
-                mainMenu();
-            }
+            else if (index=0) {
+                    mainMenu();
+			}
             else {
                 System.out.print("Invalid number!");
                 flag = false;
@@ -484,8 +484,8 @@ public class MainApp {
         boolean flag=true;
 
         for (ExpenseType expenseType : expenseTypes) {
-            System.out.println(i+". "+expenseType.toString());
-            i++;
+			System.out.println(i+". "+expenseType.toString());
+			i++;
         }
 
         ExpenseType expenseType;
@@ -494,7 +494,7 @@ public class MainApp {
             System.out.print("Enter number to select expense type: ");
             int index = input.nextInt();
             input.nextLine(); // skip newline
-            if (index-1 <= expenseTypes.size() && index >= 1)  {
+            if (index-1 <= expenseTypes.size() & index >= 1)  {
                 expenseType = expenseTypes.get(index-1);
             }
             else if (index == 0) {
