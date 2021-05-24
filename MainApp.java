@@ -341,7 +341,7 @@ public class MainApp {
 		Downpayment d = new Downpayment(value, emp);
 	}
 	
-	void newExpense() {
+		void newExpense() {
 		boolean flag;
 		
 		Employee emp = selectEmployee();
@@ -352,19 +352,19 @@ public class MainApp {
 		do {
 			int quant = input.nextInt();
 			input.nextInt(); // skip newline
-			if (value = 0){
+			if (value == 0){
 				mainMenu();
 			}
 			else if (value < 0) {
 				System.out.print("Invalid number - value/quantinty must be positive!\nPlease enter a positive number (or 0 to return to main menu): ");
                 flag = false;
-			else {
+			} else {
 				flag = true;
 			}
 		} while (!flag);
 		
 		System.out.print("Enter expense description: ");
-		int reason = input.nextLine();
+		int reason = input.nextInt();
 		input.nextLine(); // skip newline
 		
 		Expense e = new Expense(emp, et, quant, reason);  
