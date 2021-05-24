@@ -16,7 +16,7 @@ class Employee {
             this.name = n;
             this.surname = s;
             this.maxMonthlyTotal = maxMonthlyTotal;
-    }//do we need "this."?
+    }
 
     public double getMaxMonthlyTotal() {
             return this.maxMonthlyTotal;
@@ -398,17 +398,17 @@ public class MainApp {
                     printExpenses();
                     break;
                 /*case 6: 
-                    clearExpenses();
-                    break;
-                case 7: 
-                    printTransactions();
-                    break;
-                case 8:
-                    clearAll();
-                    break;
-                case 9:
-                    printAll();
-                    break;*/
+					clearExpenses();
+					break;
+				case 7: 
+					printTransactions();
+					break;
+				case 8:
+					clearAll();
+					break;
+				case 9:
+					printAll();
+					break;*/
                 case 0:
                     break;
                 default:
@@ -433,7 +433,6 @@ public class MainApp {
 
         for (Employee employee : employees) {
             System.out.println(i+". "+employee.toString());
-            //changed employee to employee.toString()
             i++;
         }
 		
@@ -446,10 +445,9 @@ public class MainApp {
             if (index-1 <= employees.size() && index >= 1)  {
                 employee = employees.get(index-1);
             }
-            /* elseif (index=0) {
+            else if (index=0) {
                     mainMenu();
 			}
-			can that work since function returns nothing? */
             else {
                 System.out.print("Invalid number!");
                 flag = false;
@@ -500,10 +498,9 @@ public class MainApp {
                 expenseType = expenseTypes.get(index-1);
                 flag = true;
             }
-            /* elseif (index==0) {
+            else if (index==0) {
                 mainMenu();
 			}
-			can that work since function returns nothing? */
             else {
                 System.out.print("Invalid number!");
                 flag = false;
