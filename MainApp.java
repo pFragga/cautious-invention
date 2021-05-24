@@ -486,8 +486,8 @@ public class MainApp {
         boolean flag;
 
         for (ExpenseType expenseType : expenseTypes) {
-        System.out.println(i+". "+expenseType.toString());
-        i++;
+			System.out.println(i+". "+expenseType.toString());
+			i++;
         }
 
         ExpenseType expenseType;
