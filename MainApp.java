@@ -343,7 +343,7 @@ public class MainApp {
 		
 	void newExpense() {
 		boolean flag;
-		
+		int value;
 		Employee emp = selectEmployee();
 		
 		ExpenseType et = selectExpType();
@@ -491,6 +491,37 @@ public class MainApp {
 
 		return menu;
     }
+
+	ExpenseType selectExpType () {
+		int i = 1;
+        boolean flag;
+       
+        for (ExpenseType expenseType : expenseTypes) {
+            System.out.println(i+". "+expenseType.toString());
+            i++;
+        }
+		
+		do {
+			System.out.print("Enter number to select expense type: ");
+			int index = input.nextInt();
+			input.nextLine(); // skip newline
+			if (index-1 <= expenseTypes.size() && index >= 1)  {
+				expenseType = expenseTypes.get(index-1);
+				flag = true;
+			}
+			/* elseif (index==0) {
+					mainMenu();
+			}
+			can that work since function returns nothing? */
+			else {
+				System.out.print("Invalid number!");
+				flag = false;
+			}
+        } while (!flag);
+			
+        	return expenseType;
+		}
+	}
 
 
 	public static void main(String[] args) {
