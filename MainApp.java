@@ -12,10 +12,10 @@ class Employee {
     private String name, surname;
     private double maxMonthlyTotal;
 
-    public Employee(String n, String s, double max) {
+    public Employee(String n, String s, double maxMonthlyTotal) {
             this.name = n;
             this.surname = s;
-            this.maxMonthlyTotal = max;
+            this.maxMonthlyTotal = maxMonthlyTotal;
     }
 
     public double getMaxMonthlyTotal() {
@@ -398,17 +398,17 @@ public class MainApp {
                     printExpenses();
                     break;
                 /*case 6: 
-					clearExpenses();
-					break;
-				case 7: 
-					printTransactions();
-					break;
-				case 8:
-					clearAll();
-					break;
-				case 9:
-					printAll();
-					break;*/
+                    clearExpenses();
+                    break;
+                case 7: 
+                    printTransactions();
+                    break;
+		case 8:
+                    clearAll();
+                    break;
+		case 9:
+                    printAll();
+                    break;*/
                 case 0:
                     break;
                 default:
@@ -445,9 +445,9 @@ public class MainApp {
             if (index-1 <= employees.size() && index >= 1)  {
                 employee = employees.get(index-1);
             }
-            else if (index=0) {
-                    mainMenu();
-			}
+            else if (index == 0) {
+                mainMenu();
+            }
             else {
                 System.out.print("Invalid number!");
                 flag = false;
@@ -481,7 +481,7 @@ public class MainApp {
 
     ExpenseType selectExpType () {
         int i = 1;
-        boolean flag;
+        boolean flag=true;
 
         for (ExpenseType expenseType : expenseTypes) {
 			System.out.println(i+". "+expenseType.toString());
@@ -498,9 +498,9 @@ public class MainApp {
                 expenseType = expenseTypes.get(index-1);
                 flag = true;
             }
-            else if (index==0) {
+            else if (index == 0) {
                 mainMenu();
-			}
+            }
             else {
                 System.out.print("Invalid number!");
                 flag = false;
