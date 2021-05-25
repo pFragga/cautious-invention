@@ -315,6 +315,11 @@ public class mainApp {
             System.out.println(expense);
         }
     }
+	
+	void printTransactions() {
+		System.out.print("Select an employee:\n");
+		getTransactionsForEmployee(selectEmployee());
+	}
 		
     void newDownpayment() {
         boolean flag=true;
@@ -426,6 +431,16 @@ public class mainApp {
             }
         }
         return employeeExpenses;
+    }
+	
+	List<Transaction> getTransactionsForEmployee(Employee employee) {
+	List<Transaction> employeeTransactions = new ArrayList<Transaction>();
+		for (Transaction transaction: transactions) {
+			if (transaction.getEmployee() == employee) {
+				employeeTransactions.add(transaction);
+			}
+		}
+        return employeeTransactions;
     }
 
     Employee selectEmployee() {
