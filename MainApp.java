@@ -339,7 +339,7 @@ public class mainApp {
             }
         } while (!flag);
 
-        Downpayment d = new Downpayment(emp, value);
+        transactions.add(new Downpayment(emp, value));
     }
 
     void newExpense() {
@@ -366,7 +366,7 @@ public class mainApp {
         System.out.print("Enter expense description: ");
         String reason = input.nextLine();
 
-        Expense e = new Expense(emp, et, quant, reason);  
+        expenses.add(new Expense(emp, et, quant, reason));
     }
 
     public void mainMenu() {
