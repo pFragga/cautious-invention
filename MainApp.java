@@ -91,7 +91,7 @@ class ExpenseType2 extends ExpenseType {
     }
 
     public String toString() {
-            return "Rate: " + this.rate + "%";
+            return "To be reimbursed by: " + this.rate + "%";
     }
 }
 
@@ -456,7 +456,7 @@ public class mainApp {
         Employee employee;
       
         do {
-            System.out.print("Enter number to select employee: ");
+            System.out.print("Enter number to select employee (or 0 to return to main menu): ");
             menu = input.nextInt();
             input.nextLine(); // skip newline
             if (menu == 0) {
@@ -508,7 +508,7 @@ public class mainApp {
         ExpenseType expenseType;
 
         do {
-            System.out.print("Enter number to select expense type: ");
+            System.out.print("Enter number to select expense type (or 0 to return to main menu): ");
             menu = input.nextInt();
             input.nextLine(); // skip newline
             if (menu == 0) {
@@ -523,8 +523,7 @@ public class mainApp {
         mainApp.index = menu;
 
         return expenseType = expenseTypes.get(index-1);
-    }
-
+    }           
 
     public static void main(String[] args) {
         System.out.println("Welcome to mainApp!");
