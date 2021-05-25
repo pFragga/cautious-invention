@@ -318,7 +318,7 @@ public class mainApp {
 	
 	void printTransactions() {
 		System.out.print("Select an employee:\n");
-		getTransactionsForEmployee(selectEmployee());
+		System.out.println(getTransactionsForEmployee(selectEmployee()));
 	}
 		
     void newDownpayment() {
