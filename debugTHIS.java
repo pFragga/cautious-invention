@@ -198,8 +198,8 @@ class Finalised extends Transaction {
     }
 }
 
-//MainApp class
-public class mainApp {
+//MainApp_bkp class
+public class MainApp_bkp {
     Scanner input;
     ArrayList<Employee> employees;
     ArrayList<Expense> expenses;
@@ -263,8 +263,8 @@ public class mainApp {
         expenses.add(e12);
     }
     
-    //MainApp Function
-    public MainApp() {
+    //MainApp_bkp Function
+    public MainApp_bkp() {
         input = new Scanner(System.in);
         employees = new ArrayList<Employee>();
         expenses = new ArrayList<Expense>();
@@ -315,6 +315,11 @@ public class mainApp {
             System.out.println(expense);
         }
     }
+
+	void printTransactions() {
+		System.out.print("Select an employee:\n");
+		getTransactionsForEmployee(selectEmployee());
+	}
 		
     void newDownpayment() {
         boolean flag=true;
@@ -398,18 +403,18 @@ public class mainApp {
                 case 5: 
                     printExpenses();
                     break;
-                /*case 6: 
-					clearExpenses();
-					break;
-				case 7: 
+                // case 6: 
+				// 	clearExpenses();
+				// 	break;
+				case 7:
 					printTransactions();
 					break;
-				case 8:
-					clearAll();
-					break;
-				case 9:
-					printAll();
-					break;*/
+				// case 8:
+				// 	clearAll();
+				// 	break;
+				// case 9:
+				// 	printAll();
+				// 	break;
                 case 0:
                     break;
                 default:
@@ -426,6 +431,17 @@ public class mainApp {
             }
         }
         return employeeExpenses;
+    }
+
+	
+	List<Transaction> getTransactionsForEmployee(Employee employee) {
+		List<Transaction> employeeTransactions = new ArrayList<Transaction>();
+		for (Transaction transaction: transactions) {
+			if (transaction.getEmployee() == employee) {
+				employeeTransactions.add(transaction);
+			}
+		}
+        return employeeTransactions;
     }
 
     Employee selectEmployee() {
@@ -446,8 +462,8 @@ public class mainApp {
             if (index == 0) {
                     mainMenu();
             }
-            else if (index-1 > employees.size() | index < 1) {
-                System.out.print("Invalid number!");
+            else if (index-1 <= employees.size() | index >= 1) {
+                System.out.print("Invalid number!\n");
                 flag = false;
             }
         } while (!flag);
@@ -495,7 +511,7 @@ public class mainApp {
             if (index == 0) {
                 mainMenu();
             }
-            else if (index-1 > expenseTypes.size() | index < 1){
+            else if (index-1 <= expenseTypes.size() | index >= 1) {
                 System.out.print("Invalid number!");
                 flag = false;
             }
@@ -506,8 +522,8 @@ public class mainApp {
 
 
     public static void main(String[] args) {
-        System.out.println("Welcome to MainApp!");
-        MainApp myapp = new MainApp();
+        System.out.println("Welcome to MainApp_bkp!");
+        MainApp_bkp myapp = new MainApp_bkp();
         myapp.mainMenu();
         myapp.loadData();
     }
