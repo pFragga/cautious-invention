@@ -353,7 +353,7 @@ public class mainApp {
         System.out.print("Enter expense quantinty or value to continue (or 0 to return to main menu): ");
         do {
             quant = input.nextInt();
-            input.nextInt(); // skip newline
+            input.nextLine(); // skip newline
             if (quant == 0){
                     mainMenu();
             }
