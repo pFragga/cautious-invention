@@ -198,13 +198,14 @@ class Finalised extends Transaction {
     }
 }
 
-//MainApp class
-public class MainApp {
+//mainApp class
+public class mainApp {
     Scanner input;
     ArrayList<Employee> employees;
     ArrayList<Expense> expenses;
     ArrayList<ExpenseType> expenseTypes;
     ArrayList<Transaction> transactions;
+    int index;
 
     //Load data to create database
     void loadData() {
@@ -263,7 +264,7 @@ public class MainApp {
     }
     
     //MainApp Function
-    public MainApp() {
+    public mainApp() {
         input = new Scanner(System.in);
         employees = new ArrayList<Employee>();
         expenses = new ArrayList<Expense>();
@@ -442,19 +443,16 @@ public class MainApp {
             System.out.print("Enter number to select employee: ");
             int index = input.nextInt();
             input.nextLine(); // skip newline
-            if (index-1 <= employees.size() & index >= 1)  {
-                employee = employees.get(index-1);
-            }
-            else if (index=0) {
+            if (index == 0) {
                     mainMenu();
-			}
-            else {
+            }
+            else if (index-1 > employees.size() | index < 1) {
                 System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
            
-        return employee;
+        return employee = employees.get(index-1);
     }
 
     int selectExpenseType() {
@@ -494,25 +492,22 @@ public class MainApp {
             System.out.print("Enter number to select expense type: ");
             int index = input.nextInt();
             input.nextLine(); // skip newline
-            if (index-1 <= expenseTypes.size() & index >= 1)  {
-                expenseType = expenseTypes.get(index-1);
-            }
-            else if (index == 0) {
+            if (index == 0) {
                 mainMenu();
             }
-            else {
+            else if (index-1 > expenseTypes.size() | index < 1){
                 System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
 
-        return expenseType;
+        return expenseType = expenseTypes.get(index-1);
     }
 
 
     public static void main(String[] args) {
-        System.out.println("Welcome to MainApp!");
-        MainApp myapp = new MainApp();
+        System.out.println("Welcome to mainApp!");
+        mainApp myapp = new mainApp();
         myapp.mainMenu();
         myapp.loadData();
     }
