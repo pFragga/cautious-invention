@@ -198,14 +198,14 @@ class Finalised extends Transaction {
     }
 }
 
-//MainApp_bkp class
-public class MainApp_bkp {
+//mainApp class
+public class mainApp {
     Scanner input;
     ArrayList<Employee> employees;
     ArrayList<Expense> expenses;
     ArrayList<ExpenseType> expenseTypes;
     ArrayList<Transaction> transactions;
-    int index;
+    public static int index;
 
     //Load data to create database
     void loadData() {
@@ -263,8 +263,8 @@ public class MainApp_bkp {
         expenses.add(e12);
     }
     
-    //MainApp_bkp Function
-    public MainApp_bkp() {
+    //MainApp Function
+    public mainApp() {
         input = new Scanner(System.in);
         employees = new ArrayList<Employee>();
         expenses = new ArrayList<Expense>();
@@ -315,11 +315,6 @@ public class MainApp_bkp {
             System.out.println(expense);
         }
     }
-
-	void printTransactions() {
-		System.out.print("Select an employee:\n");
-		getTransactionsForEmployee(selectEmployee());
-	}
 		
     void newDownpayment() {
         boolean flag=true;
@@ -403,18 +398,18 @@ public class MainApp_bkp {
                 case 5: 
                     printExpenses();
                     break;
-                // case 6: 
-				// 	clearExpenses();
-				// 	break;
-				case 7:
+                /*case 6: 
+					clearExpenses();
+					break;
+				case 7: 
 					printTransactions();
 					break;
-				// case 8:
-				// 	clearAll();
-				// 	break;
-				// case 9:
-				// 	printAll();
-				// 	break;
+				case 8:
+					clearAll();
+					break;
+				case 9:
+					printAll();
+					break;*/
                 case 0:
                     break;
                 default:
@@ -433,20 +428,10 @@ public class MainApp_bkp {
         return employeeExpenses;
     }
 
-	
-	List<Transaction> getTransactionsForEmployee(Employee employee) {
-		List<Transaction> employeeTransactions = new ArrayList<Transaction>();
-		for (Transaction transaction: transactions) {
-			if (transaction.getEmployee() == employee) {
-				employeeTransactions.add(transaction);
-			}
-		}
-        return employeeTransactions;
-    }
-
     Employee selectEmployee() {
         int i = 1;
         boolean flag=true;
+        int menu = 0;
 
         for (Employee employee : employees) {
             System.out.println(i+". "+employee.toString());
@@ -457,17 +442,19 @@ public class MainApp_bkp {
       
         do {
             System.out.print("Enter number to select employee: ");
-            int index = input.nextInt();
+            menu = input.nextInt();
             input.nextLine(); // skip newline
-            if (index == 0) {
-                    mainMenu();
+            if (menu == 0) {
+                mainMenu();
             }
-            else if (index-1 <= employees.size() | index >= 1) {
-                System.out.print("Invalid number!\n");
+            else if (menu-1 > employees.size() | menu < 1) {
+                System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
-           
+        
+        mainApp.index = menu;
+        
         return employee = employees.get(index-1);
     }
 
@@ -496,6 +483,7 @@ public class MainApp_bkp {
     ExpenseType selectExpType () {
         int i = 1;
         boolean flag=true;
+        int menu=0;
 
         for (ExpenseType expenseType : expenseTypes) {
 			System.out.println(i+". "+expenseType.toString());
@@ -506,24 +494,26 @@ public class MainApp_bkp {
 
         do {
             System.out.print("Enter number to select expense type: ");
-            int index = input.nextInt();
+            menu = input.nextInt();
             input.nextLine(); // skip newline
-            if (index == 0) {
+            if (menu == 0) {
                 mainMenu();
             }
-            else if (index-1 <= expenseTypes.size() | index >= 1) {
+            else if (menu-1 > expenseTypes.size() | menu < 1){
                 System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
+        
+        mainApp.index = menu;
 
         return expenseType = expenseTypes.get(index-1);
     }
 
 
     public static void main(String[] args) {
-        System.out.println("Welcome to MainApp_bkp!");
-        MainApp_bkp myapp = new MainApp_bkp();
+        System.out.println("Welcome to mainApp!");
+        mainApp myapp = new mainApp();
         myapp.mainMenu();
         myapp.loadData();
     }
