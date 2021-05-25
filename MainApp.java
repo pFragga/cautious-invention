@@ -91,7 +91,7 @@ class ExpenseType2 extends ExpenseType {
     }
 
     public String toString() {
-            return "Rate in percentage: " + this.rate + "%";
+            return "Rate: " + this.rate + "%";
     }
 }
 
@@ -118,7 +118,7 @@ class Expense {
 	}
 
     public String toString() {
-		return employee + " spent " + amount + "$, the reason being: " + reason + " " + expenseType;
+		return employee + ": " + amount + ". " + expenseType + ". The reason being: " + reason;
     }
 }
 	
@@ -205,7 +205,7 @@ public class mainApp {
     ArrayList<Expense> expenses;
     ArrayList<ExpenseType> expenseTypes;
     ArrayList<Transaction> transactions;
-    int index;
+    public static int index;
 
     //Load data to create database
     void loadData() {
@@ -223,11 +223,11 @@ public class mainApp {
         expenseTypes.add(food);
         ExpenseType1 rec = new ExpenseType1 (6900, "recreation", 400, 100, "activity");
         expenseTypes.add(rec);
-        ExpenseType2 health = new ExpenseType2 (6589, "healthcare", 700, 0.5);
+        ExpenseType2 health = new ExpenseType2 (6589, "healthcare", 700, 50);
         expenseTypes.add(health);
-        ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 0.6);
+        ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 60);
         expenseTypes.add(ins);
-        ExpenseType2 wfh = new ExpenseType2 (5658, "working from home", 1000, 0.8);
+        ExpenseType2 wfh = new ExpenseType2 (5658, "working from home", 1000, 80);
         expenseTypes.add(wfh);
         Downpayment d1 = new Downpayment (karl, 100);
         transactions.add(d1);
@@ -237,23 +237,23 @@ public class mainApp {
         transactions.add(d3);
         Downpayment d4 = new Downpayment (john, 800);
         transactions.add(d4);
-        Expense e1 = new Expense (theodore, travel, 30, "kms");
+        Expense e1 = new Expense (theodore, travel, 30, "Edinburgh - Livingston");
         expenses.add(e1);
         Expense e2 = new Expense (theodore, food, 5, "meals");
         expenses.add(e2);
         Expense e3 = new Expense (theodore, ins, 500, "car");
         expenses.add(e3);
-        Expense e4 = new Expense (karl, wfh, 500, "screen");
+        Expense e4 = new Expense (karl, wfh, 500, "PC screen");
         expenses.add(e4);
         Expense e5 = new Expense (karl, health, 400, "check-up");
         expenses.add(e5);
-        Expense e6 = new Expense (karl, rec, 3, "museum");
+        Expense e6 = new Expense (karl, rec, 3, "museum visits");
         expenses.add(e6);
         Expense e7 = new Expense (petros, health, 400, "doctor");
         expenses.add(e7);
         Expense e8 = new Expense (petros, ins, 1000, "liability");
         expenses.add(e8);
-        Expense e9 = new Expense (petros, travel, 20, "kms");
+        Expense e9 = new Expense (petros, travel, 20, "cab ride");
         expenses.add(e9);
         Expense e10 = new Expense (john, wfh, 400, "bed");
         expenses.add(e10);
@@ -315,6 +315,11 @@ public class mainApp {
             System.out.println(expense);
         }
     }
+	
+	void printTransactions() {
+		System.out.print("Select an employee:\n");
+		getTransactionsForEmployee(selectEmployee());
+	}
 		
     void newDownpayment() {
         boolean flag=true;
@@ -336,7 +341,7 @@ public class mainApp {
 
         Downpayment d = new Downpayment(emp, value);
     }
-		
+
     void newExpense() {
         boolean flag=true;
         int quant;
@@ -400,11 +405,11 @@ public class mainApp {
                     break;
                 /*case 6: 
 					clearExpenses();
-					break;
+					break;*/
 				case 7: 
 					printTransactions();
 					break;
-				case 8:
+				/*case 8:
 					clearAll();
 					break;
 				case 9:
@@ -427,10 +432,21 @@ public class mainApp {
         }
         return employeeExpenses;
     }
+	
+	List<Transaction> getTransactionsForEmployee(Employee employee) {
+	List<Transaction> employeeTransactions = new ArrayList<Transaction>();
+		for (Transaction transaction: transactions) {
+			if (transaction.getEmployee() == employee) {
+				employeeTransactions.add(transaction);
+			}
+		}
+        return employeeTransactions;
+    }
 
     Employee selectEmployee() {
         int i = 1;
         boolean flag=true;
+        int menu = 0;
 
         for (Employee employee : employees) {
             System.out.println(i+". "+employee.toString());
@@ -441,17 +457,19 @@ public class mainApp {
       
         do {
             System.out.print("Enter number to select employee: ");
-            int index = input.nextInt();
+            menu = input.nextInt();
             input.nextLine(); // skip newline
-            if (index == 0) {
-                    mainMenu();
+            if (menu == 0) {
+                mainMenu();
             }
-            else if (index-1 > employees.size() | index < 1) {
+            else if (menu-1 > employees.size() | menu < 1) {
                 System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
-           
+        
+        mainApp.index = menu;
+        
         return employee = employees.get(index-1);
     }
 
@@ -480,9 +498,10 @@ public class mainApp {
     ExpenseType selectExpType () {
         int i = 1;
         boolean flag=true;
+        int menu=0;
 
         for (ExpenseType expenseType : expenseTypes) {
-			System.out.println(i+". "+expenseType.toString());
+			System.out.println(i+". "+expenseType.getDescription());
 			i++;
         }
 
@@ -490,16 +509,18 @@ public class mainApp {
 
         do {
             System.out.print("Enter number to select expense type: ");
-            int index = input.nextInt();
+            menu = input.nextInt();
             input.nextLine(); // skip newline
-            if (index == 0) {
+            if (menu == 0) {
                 mainMenu();
             }
-            else if (index-1 > expenseTypes.size() | index < 1){
+            else if (menu-1 > expenseTypes.size() | menu < 1){
                 System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
+        
+        mainApp.index = menu;
 
         return expenseType = expenseTypes.get(index-1);
     }
