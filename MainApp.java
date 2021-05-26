@@ -383,6 +383,35 @@ public class mainApp {
         expenses.add(new Expense(emp, et, quant, reason));
     }
 
+    void printAll() {
+        boolean flag = false;
+        for (Transaction transaction : transactions) {
+            if (transaction instanceof Finalised) {
+                System.out.println(transaction.getEmployee() + "\n" + transaction.getValue());
+                flag = true;
+            }
+        }
+
+        List<Double> finalisedTransactions = new ArrayList<Double>();
+        for (Transaction transaction : transactions) {
+            if (transaction instanceof Finalised) {
+                finalisedTransactions.add(transaction.getValue());
+                flag = true;
+            }
+        }
+
+        double sumFinalisedTransactions = 0;
+        for (Double value : finalisedTransactions) {
+            sumFinalisedTransactions += value;
+            flag = true;
+        }
+        System.out.println("Total sum of finalised transactions: " + sumFinalisedTransactions);
+
+        if (flag == false) {
+            System.out.println("No transactions have been finalised yet!");
+        }
+	}
+	
     public void mainMenu() {
         int menu;
 
