@@ -285,8 +285,11 @@ public class mainApp {
     }
 
     void newExpenseType() {
-        System.out.print("Enter ID: ");
+        System.out.print("Enter ID (or 0 to return to main menu): ");
         int a = input.nextInt();
+		if (a == 0) {
+            mainMenu();
+        }
         input.nextLine();//skip new line
         System.out.print("Enter description of expense type: ");
         String b = input.nextLine();
@@ -302,7 +305,8 @@ public class mainApp {
             System.out.print("Enter unit of measurement: ");
             String u = input.nextLine();
             expenseTypes.add(new ExpenseType1(a, b, c, p, u));
-        } else {
+        }
+		else {
             System.out.print("Enter rate: ");
             double r = input.nextDouble();
             input.nextLine();//skip new line
@@ -434,7 +438,7 @@ public class mainApp {
     }
 	
 	List<Transaction> getTransactionsForEmployee(Employee employee) {
-	List<Transaction> employeeTransactions = new ArrayList<Transaction>();
+		List<Transaction> employeeTransactions = new ArrayList<Transaction>();
 		for (Transaction transaction: transactions) {
 			if (transaction.getEmployee() == employee) {
 				employeeTransactions.add(transaction);
