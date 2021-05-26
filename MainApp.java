@@ -274,8 +274,18 @@ public class mainApp {
     }
 	
     void newEmployee() {
-        System.out.print("Enter employee's last name: ");
+        System.out.print("Enter employee's last name (or 0 to return to main menu): ");
         String a = input.nextLine();
+		int number = 1;	
+		try {
+			number = Integer.parseInt(a);
+		}
+		catch (NumberFormatException ex) {
+			ex.printStackTrace();
+		}
+		if (number == 0) {
+			mainMenu();
+		}
         System.out.print("Enter employee's first name: ");
         String b = input.nextLine();
         System.out.print("Enter employee's max monthly compensation: ");
