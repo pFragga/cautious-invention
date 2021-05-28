@@ -405,12 +405,12 @@ public class mainApp {
             sumFinalisedTransactions += value;
             flag = true;
         }
+	    
         System.out.println("Total sum of finalised transactions: " + sumFinalisedTransactions);
-
         if (flag == false) {
             System.out.println("No transactions have been finalised yet!");
         }
-	}
+    }
 	
     public void mainMenu() {
         int menu;
