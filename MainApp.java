@@ -289,7 +289,34 @@ public class MainApp {
         loadData();
     }
 
-    // newEmployee function
+    // 1st Menu function: newExpenseType
+    void newExpenseType() {
+        System.out.print("Enter ID: ");
+        int a = input.nextInt();
+        input.nextLine();// skip new line
+        System.out.print("Enter description of expense type: ");
+        String b = input.nextLine();
+        System.out.print("Enter maximum monthly expense of expense type: ");
+        Double c = input.nextDouble();
+        input.nextLine();// skip new line
+        int type = selectExpenseType();
+    
+        if (type == 1) {
+            System.out.print("Enter price: ");
+            double p = input.nextDouble();
+            input.nextLine();// skip new line
+            System.out.print("Enter unit of measurement: ");
+            String u = input.nextLine();
+            expenseTypes.add(new ExpenseType1(a, b, c, p, u));
+            } else {
+            System.out.print("Enter rate: ");
+            double r = input.nextDouble();
+            input.nextLine();// skip new line
+            expenseTypes.add(new ExpenseType2(a, b, c, r));
+        }
+    }
+
+    // 2nd Menu function: newEmployee
     void newEmployee() {
         System.out.print("Enter employee's last name: ");
         String a = input.nextLine();
@@ -301,47 +328,63 @@ public class MainApp {
         employees.add(new Employee(a, b, c));
     }
 
-    // newExpenseType function
-    void newExpenseType() {
-        System.out.print("Enter ID: ");
-        int a = input.nextInt();
-        input.nextLine();// skip new line
-        System.out.print("Enter description of expense type: ");
-        String b = input.nextLine();
-        System.out.print("Enter maximum monthly expense of expense type: ");
-        Double c = input.nextDouble();
-        input.nextLine();// skip new line
-        int type = selectExpenseType();
+    // 3rd Menu function: newExpense
+    void newExpense() {
+        boolean flag = true;
+        int quant;
+        Employee emp = selectEmployee();
+        ExpenseType et = selectExpType();
+        
+        System.out.print("Enter expense quantinty or value to continue (or 0 to return to main menu): ");
+            do {
+                quant = input.nextInt();
+                input.nextLine(); // skip newline
+                if (quant == 0) {
+                    mainMenu();
+                } else if (quant < 0) {
+                    System.out.print(
+                        "Invalid number - value/quantinty must be positive!\nPlease enter a positive number (or 0 to return to main menu): "
+                    );
+                    flag = false;
+                }
+            } while (!flag);
 
-        if (type == 1) {
-            System.out.print("Enter price: ");
-            double p = input.nextDouble();
-            input.nextLine();// skip new line
-            System.out.print("Enter unit of measurement: ");
-            String u = input.nextLine();
-            expenseTypes.add(new ExpenseType1(a, b, c, p, u));
-        } else {
-            System.out.print("Enter rate: ");
-            double r = input.nextDouble();
-            input.nextLine();// skip new line
-            expenseTypes.add(new ExpenseType2(a, b, c, r));
-        }
+        System.out.print("Enter expense description: ");
+        String reason = input.nextLine();
+        expenses.add(new Expense(emp, et, quant, reason));
     }
 
-    // printExpenses function
+    // 4th Menu function: newDownpayment
+    void newDownpayment() {
+        boolean flag = true;
+        int value;
+        Employee emp = selectEmployee();
+    
+        System.out.print("Please enter value of downpayment (or 0 to return to main menu): ");
+        do {
+            value = input.nextInt();
+            input.nextLine(); // skip newline
+            if (value == 0) {
+                mainMenu();
+            } else if (value < 0) {
+                System.out.print(
+                    "Invalid number - value must be positive!\nPlease enter value of downpayment (or 0 to return to main menu): "
+                );
+                flag = false;
+            }
+        } while (!flag);
+    
+        transactions.add(new Downpayment(emp, value));
+    }
+
+    // 5th Menu function: printExpenses
     void printExpenses() {
         for (Expense expense : expenses) {
             System.out.println(expense);
         }
     }
 
-    // printTransactions function
-    void printTransactions() {
-        System.out.print("Select an employee:\n");
-        System.out.println(getTransactionsForEmployee(selectEmployee()));
-    }
-
-    //clearExpenses function
+    // 6th Menu function: clearExpenses
     void clearExpenses() {
 
         Employee employee = selectEmployee();
@@ -353,7 +396,6 @@ public class MainApp {
 
         boolean flag;
         List<Double> amountsToSum = new ArrayList<Double>();
-        // List<Double> amountsToSumForType1 = new ArrayList<Double>();
         for (int i = 0; i < employeeExpenses.size(); i++) {
             flag = true;
             int j = 0;
@@ -414,61 +456,22 @@ public class MainApp {
         }
 
         Finalised fin = new Finalised(employee, sum);
-
         System.out.print(employee.toString() + " has his/her transaction finalised");
 
     }
 
-    // newDownpayment function
-    void newDownpayment() {
-        boolean flag = true;
-        int value;
-        Employee emp = selectEmployee();
-
-        System.out.print("Please enter value of downpayment (or 0 to return to main menu): ");
-        do {
-            value = input.nextInt();
-            input.nextLine(); // skip newline
-            if (value == 0) {
-                mainMenu();
-            } else if (value < 0) {
-                System.out.print(
-                        "Invalid number - value must be positive!\nPlease enter value of downpayment (or 0 to return to main menu): ");
-                flag = false;
-            }
-        } while (!flag);
-
-        transactions.add(new Downpayment(emp, value));
+    // 7th Menu function: printTransactions
+    void printTransactions() {
+        System.out.print("Select an employee:\n");
+        System.out.println(getTransactionsForEmployee(selectEmployee()));
     }
 
-    // newExpense
-    void newExpense() {
-        boolean flag = true;
-        int quant;
-
-        Employee emp = selectEmployee();
-
-        ExpenseType et = selectExpType();
-
-        System.out.print("Enter expense quantinty or value to continue (or 0 to return to main menu): ");
-        do {
-            quant = input.nextInt();
-            input.nextLine(); // skip newline
-            if (quant == 0) {
-                mainMenu();
-            } else if (quant < 0) {
-                System.out.print(
-                        "Invalid number - value/quantinty must be positive!\nPlease enter a positive number (or 0 to return to main menu): ");
-                flag = false;
-            }
-        } while (!flag);
-
-        System.out.print("Enter expense description: ");
-        String reason = input.nextLine();
-
-        expenses.add(new Expense(emp, et, quant, reason));
+    //8th Menu function: clearAll
+    void clearAll() {
+        System.out.println("Oops! It seems this operation in not ready yet!");
     }
 
+    // 9th Menu function: printAll
     void printAll() {
         boolean flag = false;
         for (Transaction transaction : transactions) {
@@ -491,12 +494,14 @@ public class MainApp {
             sumFinalisedTransactions += value;
             flag = true;
         }
+
         System.out.println("Total sum of finalised transactions: " + sumFinalisedTransactions);
         if (flag == false) {
             System.out.println("No transactions have been finalised yet!");
         }
     }
 
+    // Menu
     public void mainMenu() {
         int menu;
 
@@ -531,9 +536,9 @@ public class MainApp {
                 case 7:
                     printTransactions();
                     break;
-                // case 8:
-                // clearAll();
-                // break;
+                case 8:
+                    clearAll();
+                    break;
                 case 9:
                     printAll();
                     break;
@@ -545,6 +550,7 @@ public class MainApp {
         } while (menu != 0);
     }
 
+    // Method getExpensesForEmployee
     List<Expense> getExpensesForEmployee(Employee employee) {
         List<Expense> employeeExpenses = new ArrayList<Expense>();
         for (Expense expense : expenses) {
@@ -555,6 +561,7 @@ public class MainApp {
         return employeeExpenses;
     }
 
+    // Method getTransactionsForEmployee
     List<Transaction> getTransactionsForEmployee(Employee employee) {
         List<Transaction> employeeTransactions = new ArrayList<Transaction>();
         for (Transaction transaction : transactions) {
@@ -565,6 +572,7 @@ public class MainApp {
         return employeeTransactions;
     }
 
+    // Method selectEmployee
     Employee selectEmployee() {
         int i = 1;
         boolean flag = true;
@@ -594,6 +602,7 @@ public class MainApp {
         return employee = employees.get(index - 1);
     }
 
+    // Method selectExpenseType
     int selectExpenseType() {
         boolean flag = true;
         int menu;
@@ -613,6 +622,7 @@ public class MainApp {
         return menu;
     }
 
+    // Method selectExpType
     ExpenseType selectExpType() {
         int i = 1;
         boolean flag = true;
