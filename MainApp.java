@@ -7,122 +7,127 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//Employee class
+// Employee class
 class Employee {
     private String name, surname;
     private double maxMonthlyTotal;
 
     public Employee(String n, String s, double maxMonthlyTotal) {
-            this.name = n;
-            this.surname = s;
-            this.maxMonthlyTotal = maxMonthlyTotal;
+        this.name = n;
+        this.surname = s;
+        this.maxMonthlyTotal = maxMonthlyTotal;
     }
 
     public double getMaxMonthlyTotal() {
-            return this.maxMonthlyTotal;
+        return this.maxMonthlyTotal;
     }
 
     public String toString() {
-            return name + " " + surname;
+        return name + " " + surname;
     }
 }
 
-//ExpenseType class
+// ExpenseType class
 abstract class ExpenseType {
     private int ID;
     private String desc;
     private double maxMonthlyExpense;
 
-    public ExpenseType (int ID, String desc, double maxMonthlyExpense) {
-            this.ID = ID;
-    this.desc = desc;
-    this.maxMonthlyExpense = maxMonthlyExpense;
+    public ExpenseType(int ID, String desc, double maxMonthlyExpense) {
+        this.ID = ID;
+        this.desc = desc;
+        this.maxMonthlyExpense = maxMonthlyExpense;
     }
 
-    public String getDescription () {
-            return this.desc;
+    public int getID() {
+        return this.ID;
     }
 
-    public double getMaxMonthlyExpense () {
-            return this.maxMonthlyExpense;
+    public String getDescription() {
+        return this.desc;
+    }
+
+    public double getMaxMonthlyExpense() {
+        return this.maxMonthlyExpense;
     }
 }
 
+// ExpenseType1 class
 class ExpenseType1 extends ExpenseType {
     private double price;
     private String unitOfMeasurement;
+
     public ExpenseType1(int ID, String desc, double maxMonthlyExpense, double p, String unit) {
-            super(ID, desc, maxMonthlyExpense);
-            price = p;
-            unitOfMeasurement = unit;
+        super(ID, desc, maxMonthlyExpense);
+        price = p;
+        unitOfMeasurement = unit;
     }
 
-    public double getPrice () {
-            return this.price;
+    public double getPrice() {
+        return this.price;
     }
 
-    public String getUnitMeasurement () {
-            return this.unitOfMeasurement;
+    public String getUnitMeasurement() {
+        return this.unitOfMeasurement;
     }
 
-    public double calcValue (double quantity) {
-            return  quantity * this.price;
-    }
-
+    @Override
     public String toString() {
-            return "Price per unit: " + this.price + "/" + this.unitOfMeasurement;
+        return "Price per unit: " + this.price + "/" + this.unitOfMeasurement;
     }
 }
 
-//ExpenseType2 class
+// ExpenseType2 class
 class ExpenseType2 extends ExpenseType {
     private double rate;
+
     public ExpenseType2(int ID, String desc, double maxMonthlyExpense, double rate) {
-            super(ID, desc, maxMonthlyExpense);
-            this.rate = rate;
+        super(ID, desc, maxMonthlyExpense);
+        this.rate = rate;
     }
 
     public double getRate() {
-            return this.rate;
+        return this.rate;
     }
 
-    public double calcValue (double n) {
-            return (n * this.rate) / 100;
-    }
-
+    @Override
     public String toString() {
-            return "To be reimbursed by: " + this.rate + "%";
+        return "To be reimbursed by: " + this.rate + "%";
     }
 }
 
-//Expense class
+// Expense class
 class Expense {
     private Employee employee;
     private ExpenseType expenseType;
     private double amount;
-	private String reason;
+    private String reason;
 
-	public Expense (Employee emp, ExpenseType type, double amount, String reason) {
-		this.employee = emp;
-		this.expenseType = type;
-		this.amount = amount;
-		this.reason = reason;
-	}
+    public Expense(Employee emp, ExpenseType type, double amount, String reason) {
+        this.employee = emp;
+        this.expenseType = type;
+        this.amount = amount;
+        this.reason = reason;
+    }
 
     public Employee getEmployee() {
-		return employee;
+        return employee;
     }
 
-	public ExpenseType getExpenseType () {
-		return this.expenseType; 
-	}
+    public ExpenseType getExpenseType() {
+        return this.expenseType;
+    }
+
+    public double getAmount() {
+        return this.amount;
+    }
 
     public String toString() {
-		return employee + ": " + amount + ". " + expenseType + ". The reason being: " + reason;
+        return employee + ": " + amount + ". " + expenseType + ". The reason being: " + reason;
     }
 }
-	
-//Transaction class
+
+// Transaction class
 abstract class Transaction {
     private Employee employee;
     private double value;
@@ -145,7 +150,7 @@ abstract class Transaction {
     }
 }
 
-//Downpayment class
+// Downpayment class
 class Downpayment extends Transaction {
     public Downpayment(Employee employee, double value) {
         super(employee, value);
@@ -157,7 +162,7 @@ class Downpayment extends Transaction {
     }
 }
 
-//Difference class
+// Difference class
 class Difference extends Transaction {
     public Difference(Employee employee, double value) {
         super(employee, value);
@@ -169,37 +174,39 @@ class Difference extends Transaction {
     }
 }
 
-//Compensation class
+// Compensation class
 class Compensation extends Transaction {
     private ExpenseType expenseType;
+
     public Compensation(Employee employee, double value, ExpenseType type) {
-            super(employee, value);
-            this.expenseType = type;
+        super(employee, value);
+        this.expenseType = type;
     }
 
     public ExpenseType getExpenseType() {
-            return this.expenseType;
+        return this.expenseType;
     }
 
     @Override
     public String toString() {
-            return this.getValue() + " Compensation of " + this.getExpenseType() + " by " + this.getEmployee();
+        return this.getValue() + " Compensation of " + this.getExpenseType() + " by " + this.getEmployee();
     }
 }
 
-//Finalised class
+// Finalised class
 class Finalised extends Transaction {
     public Finalised(Employee employee, double value) {
         super(employee, value);
     }
 
+    @Override
     public String toString() {
-        return "Final compensation for " + this.getEmployee() + " => " + this.getValue();
+        return "Final compensation for " + this.getEmployee() + " : " + this.getValue();
     }
 }
 
-//mainApp class
-public class mainApp {
+// MainApp class containing main function
+public class MainApp {
     Scanner input;
     ArrayList<Employee> employees;
     ArrayList<Expense> expenses;
@@ -207,7 +214,7 @@ public class mainApp {
     ArrayList<Transaction> transactions;
     public static int index;
 
-    //Load data to create database
+    // Load data to create database
     void loadData() {
         Employee petros = new Employee("Peter", "Frangatzis", 1000);
         employees.add(petros);
@@ -221,50 +228,59 @@ public class mainApp {
         expenseTypes.add(travel);
         ExpenseType1 food = new ExpenseType1(1542, "food", 500, 50, "meal");
         expenseTypes.add(food);
-        ExpenseType1 rec = new ExpenseType1 (6900, "recreation", 400, 100, "activity");
+        ExpenseType1 rec = new ExpenseType1(6900, "recreation", 400, 100, "activity");
         expenseTypes.add(rec);
-        ExpenseType2 health = new ExpenseType2 (6589, "healthcare", 700, 50);
+        ExpenseType2 health = new ExpenseType2(6589, "healthcare", 700, 50);
         expenseTypes.add(health);
-        ExpenseType2 ins = new ExpenseType2 (1543, "insurance", 350, 60);
+        ExpenseType2 ins = new ExpenseType2(1543, "insurance", 350, 60);
         expenseTypes.add(ins);
-        ExpenseType2 wfh = new ExpenseType2 (5658, "working from home", 1000, 80);
+        ExpenseType2 wfh = new ExpenseType2(5658, "working from home", 1000, 80);
         expenseTypes.add(wfh);
-        Downpayment d1 = new Downpayment (karl, 100);
+        Downpayment d1 = new Downpayment(karl, 100);
         transactions.add(d1);
-        Downpayment d2 = new Downpayment (theodore, 500);
+        Downpayment d2 = new Downpayment(theodore, 500);
         transactions.add(d2);
-        Downpayment d3 = new Downpayment (petros, 200);
+        Downpayment d3 = new Downpayment(petros, 200);
         transactions.add(d3);
-        Downpayment d4 = new Downpayment (john, 800);
+        Downpayment d4 = new Downpayment(john, 800);
         transactions.add(d4);
-        Expense e1 = new Expense (theodore, travel, 30, "Edinburgh - Livingston");
+        /**
+         * We created 2 Finalised objects to test if printAll() worked properly
+         * 
+         * Finalised objects normally created through clearExpenses()
+         */
+        Finalised f1 = new Finalised(john, 800);
+        transactions.add(f1);
+        Finalised f2 = new Finalised(karl, 300);
+        transactions.add(f2);
+        Expense e1 = new Expense(theodore, travel, 30, "Edinburgh - Livingston");
         expenses.add(e1);
-        Expense e2 = new Expense (theodore, food, 5, "meals");
+        Expense e2 = new Expense(theodore, food, 5, "meals");
         expenses.add(e2);
-        Expense e3 = new Expense (theodore, ins, 500, "car");
+        Expense e3 = new Expense(theodore, ins, 500, "car");
         expenses.add(e3);
-        Expense e4 = new Expense (karl, wfh, 500, "PC screen");
+        Expense e4 = new Expense(karl, wfh, 500, "PC screen");
         expenses.add(e4);
-        Expense e5 = new Expense (karl, health, 400, "check-up");
+        Expense e5 = new Expense(karl, health, 400, "check-up");
         expenses.add(e5);
-        Expense e6 = new Expense (karl, rec, 3, "museum visits");
+        Expense e6 = new Expense(karl, rec, 3, "museum visits");
         expenses.add(e6);
-        Expense e7 = new Expense (petros, health, 400, "doctor");
+        Expense e7 = new Expense(petros, health, 400, "doctor");
         expenses.add(e7);
-        Expense e8 = new Expense (petros, ins, 1000, "liability");
+        Expense e8 = new Expense(petros, ins, 1000, "liability");
         expenses.add(e8);
-        Expense e9 = new Expense (petros, travel, 20, "cab ride");
+        Expense e9 = new Expense(petros, travel, 20, "cab ride");
         expenses.add(e9);
-        Expense e10 = new Expense (john, wfh, 400, "bed");
+        Expense e10 = new Expense(john, wfh, 400, "bed");
         expenses.add(e10);
-        Expense e11 = new Expense (john, wfh, 600, "guitar");
+        Expense e11 = new Expense(john, wfh, 600, "guitar");
         expenses.add(e11);
-        Expense e12 = new Expense (john, rec, 1, "day tripper");
+        Expense e12 = new Expense(john, rec, 1, "day tripper");
         expenses.add(e12);
     }
-    
-    //MainApp Function
-    public mainApp() {
+
+    // MainApp function
+    public MainApp() {
         input = new Scanner(System.in);
         employees = new ArrayList<Employee>();
         expenses = new ArrayList<Expense>();
@@ -272,71 +288,140 @@ public class mainApp {
         transactions = new ArrayList<Transaction>();
         loadData();
     }
-	
+
+    // newEmployee function
     void newEmployee() {
-        System.out.print("Enter employee's last name (or 0 to return to main menu): ");
+        System.out.print("Enter employee's last name: ");
         String a = input.nextLine();
-		int number = 1;	
-		try {
-			number = Integer.parseInt(a);
-		}
-		catch (NumberFormatException ex) {
-			ex.printStackTrace();
-		}
-		if (number == 0) {
-			mainMenu();
-		}
         System.out.print("Enter employee's first name: ");
         String b = input.nextLine();
         System.out.print("Enter employee's max monthly compensation: ");
         double c = input.nextDouble();
-		input.nextLine();
+        input.nextLine();
         employees.add(new Employee(a, b, c));
     }
 
+    // newExpenseType function
     void newExpenseType() {
-        System.out.print("Enter ID (or 0 to return to main menu): ");
+        System.out.print("Enter ID: ");
         int a = input.nextInt();
-		if (a == 0) {
-            mainMenu();
-        }
-        input.nextLine();//skip new line
+        input.nextLine();// skip new line
         System.out.print("Enter description of expense type: ");
         String b = input.nextLine();
         System.out.print("Enter maximum monthly expense of expense type: ");
         Double c = input.nextDouble();
-        input.nextLine();//skip new line
+        input.nextLine();// skip new line
         int type = selectExpenseType();
 
         if (type == 1) {
             System.out.print("Enter price: ");
             double p = input.nextDouble();
-            input.nextLine();//skip new line
+            input.nextLine();// skip new line
             System.out.print("Enter unit of measurement: ");
             String u = input.nextLine();
             expenseTypes.add(new ExpenseType1(a, b, c, p, u));
-        }
-		else {
+        } else {
             System.out.print("Enter rate: ");
             double r = input.nextDouble();
-            input.nextLine();//skip new line
+            input.nextLine();// skip new line
             expenseTypes.add(new ExpenseType2(a, b, c, r));
         }
     }
 
+    // printExpenses function
     void printExpenses() {
-        for(Expense expense : expenses) {
+        for (Expense expense : expenses) {
             System.out.println(expense);
         }
     }
-	
-	void printTransactions() {
-		System.out.print("Select an employee:\n");
-		System.out.println(getTransactionsForEmployee(selectEmployee()));
-	}
-		
+
+    // printTransactions function
+    void printTransactions() {
+        System.out.print("Select an employee:\n");
+        System.out.println(getTransactionsForEmployee(selectEmployee()));
+    }
+
+    //clearExpenses function
+    void clearExpenses() {
+
+        Employee employee = selectEmployee();
+        List<Expense> employeeExpenses = getExpensesForEmployee(employee);
+        List<ExpenseType> employeeExpenseTypes = new ArrayList<ExpenseType>();
+        for (Expense expense : expenses) {
+            employeeExpenseTypes.add(expense.getExpenseType());
+        }
+
+        boolean flag;
+        List<Double> amountsToSum = new ArrayList<Double>();
+        // List<Double> amountsToSumForType1 = new ArrayList<Double>();
+        for (int i = 0; i < employeeExpenses.size(); i++) {
+            flag = true;
+            int j = 0;
+            do {
+                if (employeeExpenses.get(i).getExpenseType() == employeeExpenseTypes.get(j)) {
+                    amountsToSum.set(j, amountsToSum.get(j) + employeeExpenses.get(i).getAmount());
+                    flag = false;
+                }
+                j++;
+            } while (flag);
+        }
+
+        List<Double> valueOfExpenses = new ArrayList<Double>();
+        int i = 0;
+        for (ExpenseType expType : employeeExpenseTypes) {
+            if (expType instanceof ExpenseType1) {
+                ExpenseType1 exp1 = (ExpenseType1) expType;
+                valueOfExpenses.set(i, exp1.getPrice() * amountsToSum.get(i));
+            } else if (expType instanceof ExpenseType2) {
+                ExpenseType2 exp2 = (ExpenseType2) expType;
+                valueOfExpenses.set(i, exp2.getRate() * amountsToSum.get(i));
+            }
+            i++;
+        }
+
+        i = 0;
+        for (double value : valueOfExpenses) {
+            if (valueOfExpenses.get(i) > employeeExpenseTypes.get(i).getMaxMonthlyExpense()) {
+                valueOfExpenses.set(i, employeeExpenseTypes.get(i).getMaxMonthlyExpense());
+            }
+            i++;
+        }
+
+        double sum = 0;
+        i = 0;
+        for (double value : valueOfExpenses) {
+            if (valueOfExpenses.get(i) != 0) {
+                Compensation comp = new Compensation(employee, valueOfExpenses.get(i), employeeExpenseTypes.get(i));
+                sum = sum + valueOfExpenses.get(i);
+            }
+            i++;
+        }
+
+        if (sum > employee.getMaxMonthlyTotal()) {
+            double dif = sum - employee.getMaxMonthlyTotal();
+            Difference diference = new Difference(employee, dif);
+            sum = sum - dif;
+        }
+
+        i = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction instanceof Downpayment) {
+                if (transaction.getEmployee() == employee) {
+                    sum = sum - transaction.getValue();
+                }
+            }
+            i++;
+        }
+
+        Finalised fin = new Finalised(employee, sum);
+
+        System.out.print(employee.toString() + " has his/her transaction finalised");
+
+    }
+
+    // newDownpayment function
     void newDownpayment() {
-        boolean flag=true;
+        boolean flag = true;
         int value;
         Employee emp = selectEmployee();
 
@@ -346,9 +431,9 @@ public class mainApp {
             input.nextLine(); // skip newline
             if (value == 0) {
                 mainMenu();
-            }
-            else if (value < 0) {
-                System.out.print("Invalid number - value must be positive!\nPlease enter value of downpayment (or 0 to return to main menu): ");
+            } else if (value < 0) {
+                System.out.print(
+                        "Invalid number - value must be positive!\nPlease enter value of downpayment (or 0 to return to main menu): ");
                 flag = false;
             }
         } while (!flag);
@@ -356,10 +441,11 @@ public class mainApp {
         transactions.add(new Downpayment(emp, value));
     }
 
+    // newExpense
     void newExpense() {
-        boolean flag=true;
+        boolean flag = true;
         int quant;
-        
+
         Employee emp = selectEmployee();
 
         ExpenseType et = selectExpType();
@@ -368,11 +454,11 @@ public class mainApp {
         do {
             quant = input.nextInt();
             input.nextLine(); // skip newline
-            if (quant == 0){
-                    mainMenu();
-            }
-            else if (quant < 0) {
-                System.out.print("Invalid number - value/quantinty must be positive!\nPlease enter a positive number (or 0 to return to main menu): ");
+            if (quant == 0) {
+                mainMenu();
+            } else if (quant < 0) {
+                System.out.print(
+                        "Invalid number - value/quantinty must be positive!\nPlease enter a positive number (or 0 to return to main menu): ");
                 flag = false;
             }
         } while (!flag);
@@ -405,36 +491,29 @@ public class mainApp {
             sumFinalisedTransactions += value;
             flag = true;
         }
-	    
         System.out.println("Total sum of finalised transactions: " + sumFinalisedTransactions);
         if (flag == false) {
             System.out.println("No transactions have been finalised yet!");
         }
     }
-	
+
     public void mainMenu() {
         int menu;
 
         do {
-            System.out.println("Main Menu"
-                   +"\n1: Add new expense type"
-                   +"\n2: Add new employee"
-                   +"\n3: Add new employee expense"
-                   +"\n4: Add new downpayment transaction"
-                   +"\n5: Print employees' expenses"
-                   +"\n6: Clear employee's expenses"
-                   +"\n7: Print employees' transactions"
-                   +"\n8: Clear all company's employees' expenses"
-                   +"\n9: Print final monthly sum of all employees"
-                   +"\n0: exit");
+            System.out.println("Main Menu" + "\n1: Add new expense type" + "\n2: Add new employee"
+                    + "\n3: Add new employee expense" + "\n4: Add new downpayment transaction"
+                    + "\n5: Print employees' expenses" + "\n6: Clear employee's expenses"
+                    + "\n7: Print employees' transactions" + "\n8: Clear all company's employees' expenses"
+                    + "\n9: Print final monthly sum of all employees" + "\n0: exit");
             System.out.print("Enter selection to continue [0-9]: ");
             menu = input.nextInt();
-            input.nextLine(); //skip new line
+            input.nextLine(); // skip new line
             switch (menu) {
                 case 1:
                     newExpenseType();
                     break;
-                case 2: 
+                case 2:
                     newEmployee();
                     break;
                 case 3:
@@ -443,21 +522,21 @@ public class mainApp {
                 case 4:
                     newDownpayment();
                     break;
-                case 5: 
+                case 5:
                     printExpenses();
                     break;
-                /*case 6: 
-					clearExpenses();
-					break;*/
-				case 7: 
-					printTransactions();
-					break;
-				/*case 8:
-					clearAll();
-					break;
-				case 9:
-					printAll();
-					break;*/
+                case 6:
+                    clearExpenses();
+                    break;
+                case 7:
+                    printTransactions();
+                    break;
+                // case 8:
+                // clearAll();
+                // break;
+                case 9:
+                    printAll();
+                    break;
                 case 0:
                     break;
                 default:
@@ -468,69 +547,65 @@ public class mainApp {
 
     List<Expense> getExpensesForEmployee(Employee employee) {
         List<Expense> employeeExpenses = new ArrayList<Expense>();
-        for (Expense expense: expenses) {
+        for (Expense expense : expenses) {
             if (expense.getEmployee() == employee) {
                 employeeExpenses.add(expense);
             }
         }
         return employeeExpenses;
     }
-	
-	List<Transaction> getTransactionsForEmployee(Employee employee) {
-		List<Transaction> employeeTransactions = new ArrayList<Transaction>();
-		for (Transaction transaction: transactions) {
-			if (transaction.getEmployee() == employee) {
-				employeeTransactions.add(transaction);
-			}
-		}
+
+    List<Transaction> getTransactionsForEmployee(Employee employee) {
+        List<Transaction> employeeTransactions = new ArrayList<Transaction>();
+        for (Transaction transaction : transactions) {
+            if (transaction.getEmployee() == employee) {
+                employeeTransactions.add(transaction);
+            }
+        }
         return employeeTransactions;
     }
 
     Employee selectEmployee() {
         int i = 1;
-        boolean flag=true;
+        boolean flag = true;
         int menu = 0;
 
         for (Employee employee : employees) {
-            System.out.println(i+". "+employee.toString());
+            System.out.println(i + ". " + employee.toString());
             i++;
         }
-		
+
         Employee employee;
-      
+
         do {
             System.out.print("Enter number to select employee (or 0 to return to main menu): ");
             menu = input.nextInt();
             input.nextLine(); // skip newline
             if (menu == 0) {
                 mainMenu();
-            }
-            else if (menu-1 > employees.size() | menu < 1) {
+            } else if (menu - 1 > employees.size() | menu < 1) {
                 System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
-        
-        mainApp.index = menu;
-        
-        return employee = employees.get(index-1);
+
+        MainApp.index = menu;
+
+        return employee = employees.get(index - 1);
     }
 
     int selectExpenseType() {
-        boolean flag=true;
+        boolean flag = true;
         int menu;
-        System.out.println("Expense Type"
-                        +"\n1: expense defined by quantinty"
-                        +"\n2: expense defined by value"
-                        +"\n0: return to main menu");
+        System.out.println("Expense Type" + "\n1: expense defined by quantinty" + "\n2: expense defined by value"
+                + "\n0: return to main menu");
         do {
             System.out.print("Enter selection to continue [0-2]: ");
             menu = input.nextInt();
             input.nextLine(); // skip newline
-            if (menu == 0){
+            if (menu == 0) {
                 mainMenu();
-            }
-            else if (menu != 1 & menu != 2) {
+            } else if (menu != 1 & menu != 2) {
                 flag = false;
             }
         } while (!flag);
@@ -538,14 +613,14 @@ public class mainApp {
         return menu;
     }
 
-    ExpenseType selectExpType () {
+    ExpenseType selectExpType() {
         int i = 1;
-        boolean flag=true;
-        int menu=0;
+        boolean flag = true;
+        int menu = 0;
 
         for (ExpenseType expenseType : expenseTypes) {
-			System.out.println(i+". "+expenseType.getDescription());
-			i++;
+            System.out.println(i + ". " + expenseType.getDescription());
+            i++;
         }
 
         ExpenseType expenseType;
@@ -556,21 +631,21 @@ public class mainApp {
             input.nextLine(); // skip newline
             if (menu == 0) {
                 mainMenu();
-            }
-            else if (menu-1 > expenseTypes.size() | menu < 1){
+            } else if (menu - 1 > expenseTypes.size() | menu < 1) {
                 System.out.print("Invalid number!");
                 flag = false;
             }
         } while (!flag);
-        
-        mainApp.index = menu;
 
-        return expenseType = expenseTypes.get(index-1);
-    }           
+        MainApp.index = menu;
 
+        return expenseType = expenseTypes.get(index - 1);
+    }
+
+    //main function
     public static void main(String[] args) {
-        System.out.println("Welcome to mainApp!");
-        mainApp myapp = new mainApp();
+        System.out.println("Welcome to MainApp!");
+        MainApp myapp = new MainApp();
         myapp.mainMenu();
         myapp.loadData();
     }
