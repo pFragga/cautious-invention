@@ -1,4 +1,5 @@
-	void newDownpayment() {
+git rm<Theodore.java>
+void newDownpayment() {
 		boolean flag;
 		Employee emp = selectEmployee();
 		
